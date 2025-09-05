@@ -3,12 +3,11 @@ package com.example.controller;
 import com.example.entity.ApplicationEntity;
 import com.example.service.ApplicationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -53,9 +52,13 @@ public class ApplicationController {
     @PutMapping("/{id}/status")
     public ResponseEntity<ApplicationEntity> updateApplicationStatus(
             @PathVariable Integer id,
-            @RequestParam String status) {
+            @RequestBody Map<String, Integer> requestBody) {
         try {
-            ApplicationEntity updatedApplication = applicationService.updateApplicationStatus(id, status);
+            Integer statusid = requestBody.get("statusid");
+            if (statusid == null) {
+                return ResponseEntity.badRequest().build();
+            }
+            ApplicationEntity updatedApplication = applicationService.updateApplicationStatus(id, statusid);
             return ResponseEntity.ok(updatedApplication);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();

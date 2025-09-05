@@ -11,10 +11,11 @@ import lombok.*;
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(unique = true, nullable = false, updatable = false)
+    private Long companyId;
 
     @Column(nullable = false, unique = true)
-    private String name;
+    private String companyName;
 
     @Column(nullable = false)
     private String location;
