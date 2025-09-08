@@ -6,14 +6,14 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "user_skills")
+@Table(name = "job_skills")
 @Data
-@IdClass(UserSkillsId.class)
-public class UserSkills implements Serializable {
+@IdClass(JobSkillsId.class)
+public class JobSkills implements Serializable {
 
     @Id
-    @Column(name = "user_id")
-    private Long userId;
+    @Column(name = "job_id")
+    private Long jobId;
 
     @Id
     @Column(name = "skill_id")
@@ -21,8 +21,8 @@ public class UserSkills implements Serializable {
 
     // ---- Relationships ----
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private UserEntity user;
+    @JoinColumn(name = "job_id", insertable = false, updatable = false)
+    private Jobs job;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "skill_id", insertable = false, updatable = false)
@@ -30,25 +30,25 @@ public class UserSkills implements Serializable {
 }
 
 // Composite key class
-class UserSkillsId implements Serializable {
-    private Long userId;
+class JobSkillsId implements Serializable {
+    private Long jobId;
     private Long skillId;
 
-    public UserSkillsId() {
+    public JobSkillsId() {
     }
 
-    public UserSkillsId(Long userId, Long skillId) {
-        this.userId = userId;
+    public JobSkillsId(Long jobId, Long skillId) {
+        this.jobId = jobId;
         this.skillId = skillId;
     }
 
     // Getters and setters
-    public Long getUserId() {
-        return userId;
+    public Long getJobId() {
+        return jobId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setJobId(Long jobId) {
+        this.jobId = jobId;
     }
 
     public Long getSkillId() {
@@ -65,12 +65,12 @@ class UserSkillsId implements Serializable {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        UserSkillsId that = (UserSkillsId) o;
-        return userId.equals(that.userId) && skillId.equals(that.skillId);
+        JobSkillsId that = (JobSkillsId) o;
+        return jobId.equals(that.jobId) && skillId.equals(that.skillId);
     }
 
     @Override
     public int hashCode() {
-        return userId.hashCode() + skillId.hashCode();
+        return jobId.hashCode() + skillId.hashCode();
     }
 }
