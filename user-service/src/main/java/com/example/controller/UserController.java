@@ -52,4 +52,9 @@ public class UserController {
         }).orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/exists/{id}")
+    public ResponseEntity<Boolean> userExists(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.userExists(id));
+    }
+
 }

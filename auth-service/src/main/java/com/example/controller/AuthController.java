@@ -8,6 +8,7 @@ import com.example.service.AuthService;
 import org.example.dto.AuthUserInfoDto;
 
 import lombok.RequiredArgsConstructor;
+import com.example.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthService authService;
+    private final UserRepository userRepository;
 
     @PostMapping("/register")
     public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest request) {
@@ -65,5 +67,17 @@ public class AuthController {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/users/{id}/exists")
+    public ResponseEntity<Boolean> userExists(@PathVariable Long id) {
+        return ResponseEntity.ok(userRepository.existsById(id));
+    }
+
+    @GetMapping("/users/{id}/info")
+    public ResponseEntity<AuthUserInfoDto> getUserInfoById(@PathVariable Long id) {
+        return userRepository.findById(id)
+                .map(u -> ResponseEntity.ok(new AuthUserInfoDto(u.getId(), u.getUsername(), u.getRole().name())))
+                .orElse(ResponseEntity.notFound().build());
     }
 }

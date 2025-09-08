@@ -1,7 +1,6 @@
 package com.example.exceptions;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -60,14 +59,13 @@ public class GlobalExceptionHandler {
 //        return ResponseEntity.badRequest().body(errors);
 //    }
 
-    // Handle your custom exceptions, e.g., DuplicateFieldException
-//    @ExceptionHandler(DuplicateFieldException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public ResponseEntity<Map<String, String>> handleDuplicateField(DuplicateFieldException ex) {
-//        Map<String, String> errors = new HashMap<>();
-//        errors.put(ex.getFieldName(), ex.getMessage());
-//        return ResponseEntity.badRequest().body(errors);
-//    }
+    // Handle duplicate field gracefully
+    @ExceptionHandler(DuplicateFieldException.class)
+    public ResponseEntity<Map<String, String>> handleDuplicateField(DuplicateFieldException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put(ex.getFieldName(), ex.getMessage());
+        return ResponseEntity.status(409).body(errors);
+    }
 
     // A generic fallback error handler
     @ExceptionHandler(Exception.class)

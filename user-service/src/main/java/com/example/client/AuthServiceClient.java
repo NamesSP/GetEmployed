@@ -11,6 +11,12 @@ public interface AuthServiceClient {
 
     @GetMapping("/user-info/{username}")
     AuthUserInfoDto getUserInfoByUsername(@PathVariable("username") String username);
+
+    @GetMapping("/users/{id}/exists")
+    Boolean userExists(@PathVariable("id") Long id);
+
+    @GetMapping("/users/{id}/info")
+    AuthUserInfoDto getUserInfoById(@PathVariable("id") Long id);
 }
 
 

@@ -17,7 +17,7 @@ public class UserEntity {
 
     // Reference to auth-service user (foreign key at DB level,
     // but not mapped as relation here since it's a different service)
-    @Column(nullable = true)
+    @Column(nullable = true, unique = true)
     private Long authId;
 
     @Column(nullable = false, length = 100)
@@ -32,8 +32,7 @@ public class UserEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UserSkills> userSkills;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Experience> experiences;
+    // Experiences are managed in experience-service; do not model relation here
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Applications> applications;
@@ -41,11 +40,11 @@ public class UserEntity {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Recruiters recruiter;
 
-    // ---- Derived fields (not stored in DB) ----
-    @Transient
+    // ---- Denormalized fields from auth-service for convenience ----
+    @Column(nullable = true, length = 100)
     private String username; // fetched from auth-service
 
-    @Transient
+    @Column(nullable = true, length = 50)
     private String role; // fetched from auth-service
 
 }
