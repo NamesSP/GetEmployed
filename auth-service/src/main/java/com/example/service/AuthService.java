@@ -1,7 +1,7 @@
 package com.example.service;
 
 import com.example.dto.AuthResponse;
-import com.example.dto.AuthUserInfoDto;
+import org.example.dto.AuthUserInfoDto;
 import com.example.dto.LoginRequest;
 import com.example.dto.RegisterRequest;
 import com.example.dto.RegisterResponse;
