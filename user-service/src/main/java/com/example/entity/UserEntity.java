@@ -3,12 +3,15 @@ package com.example.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
 @Entity
 @Table(name = "user_profiles")
 @Data
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class UserEntity {
 
     @Id
@@ -30,14 +33,17 @@ public class UserEntity {
 
     // ---- Relationships ----
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<UserSkills> userSkills;
 
     // Experiences are managed in experience-service; do not model relation here
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Applications> applications;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Recruiters recruiter;
 
     // ---- Denormalized fields from auth-service for convenience ----

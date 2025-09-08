@@ -2,12 +2,15 @@ package com.example.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 
 @Entity
 @Table(name = "user_skills")
 @Data
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @IdClass(UserSkillsId.class)
 public class UserSkills implements Serializable {
 
@@ -22,10 +25,12 @@ public class UserSkills implements Serializable {
     // ---- Relationships ----
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @JsonIgnore
     private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "skill_id", insertable = false, updatable = false)
+    @JsonIgnore
     private Skills skill;
 }
 
