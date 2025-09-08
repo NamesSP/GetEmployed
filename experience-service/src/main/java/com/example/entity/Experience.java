@@ -12,7 +12,7 @@ import java.time.Period;
 
 @Entity
 @Data
-@Table(name="experience")
+@Table(name = "experience")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -21,10 +21,10 @@ public class Experience {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message="user id is required")
+    @NotNull(message = "user id is required")
     private Long userId;
 
-    @NotBlank(message="title is required")
+    @NotBlank(message = "title is required")
     private String title;
 
     @NotBlank(message = "Company name is required")
@@ -41,11 +41,21 @@ public class Experience {
     private long duration;
     private boolean currentlyWorking;
 
-    @Column(length=2000)
+    @Column(length = 2000)
     private String description;
 
     @PrePersist
-    public void calcDuration(){
-        this.duration= Period.between(startDate,endDate).getYears();
+    @PreUpdate
+    public void calcDuration() {
+        if (currentlyWorking) {
+            // If still working, calculate duration till today
+            this.duration = Period.between(startDate, LocalDate.now()).getYears();
+        } else {
+            if (endDate == null) {
+                throw new IllegalArgumentException("End date is required if not currently working");
+            }
+            this.duration = Period.between(startDate, endDate).getYears();
+        }
     }
+
 }
