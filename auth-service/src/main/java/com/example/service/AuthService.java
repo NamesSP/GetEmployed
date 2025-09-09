@@ -1,10 +1,10 @@
 package com.example.service;
 
-import com.example.dto.AuthResponse;
+import org.example.dto.AuthResponse;
 import org.example.dto.AuthUserInfoDto;
-import com.example.dto.LoginRequest;
-import com.example.dto.RegisterRequest;
-import com.example.dto.RegisterResponse;
+import org.example.dto.LoginRequest;
+import org.example.dto.RegisterRequest;
+import org.example.dto.RegisterResponse;
 import com.example.entity.Role;
 import com.example.entity.User;
 import com.example.repository.UserRepository;

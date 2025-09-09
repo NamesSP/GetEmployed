@@ -1,8 +1,8 @@
+
 package com.example.controller;
 
-import com.example.entity.UserEntity;
+import org.example.dto.UserDto;
 import com.example.service.UserService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,51 +10,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
+
     @Autowired
     private UserService userService;
 
-    @PostMapping("/create")
-    public ResponseEntity<UserEntity> createUser(@Valid @RequestBody UserEntity user) {
-        UserEntity savedUser = userService.createUser(user);
-        return ResponseEntity.ok(savedUser);
+    @PostMapping
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+        return ResponseEntity.ok(userService.createUser(userDto));
     }
 
-    @GetMapping("/get/allUsers")
-    public ResponseEntity<List<UserEntity>> getAllUsers() {
-        List<UserEntity> users = userService.getAllUsers();
-        return ResponseEntity.ok(users);
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+        UserDto userDto = userService.getUserById(id);
+        if (userDto != null) {
+            return ResponseEntity.ok(userDto);
+        }
+        return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<UserEntity> getUserById(@PathVariable Long id) {
-        return userService.getUserById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @PutMapping("/set/{id}")
-    public ResponseEntity<UserEntity> updateUser(@PathVariable Long id, @Valid @RequestBody UserEntity user) {
-        return userService.getUserById(id).map(existingUser -> {
-            user.setUserId(id);  // keep same id for update
-            UserEntity updatedUser = userService.updateUser(user);
-            return ResponseEntity.ok(updatedUser);
-        }).orElse(ResponseEntity.notFound().build());
-
+    @GetMapping("/email/{email}")
+    public ResponseEntity<UserDto> getUserByEmail(@PathVariable String email) {
+        UserDto userDto = userService.getUserByEmail(email);
+        if (userDto != null) {
+            return ResponseEntity.ok(userDto);
+        }
+        return ResponseEntity.notFound().build();
     }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        return userService.getUserById(id).map(existingUser -> {
-            userService.deleteUser(id);
-            return ResponseEntity.noContent().<Void>build();
-        }).orElse(ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("/exists/{id}")
-    public ResponseEntity<Boolean> userExists(@PathVariable Long id) {
-        return ResponseEntity.ok(userService.userExists(id));
-    }
-
 }

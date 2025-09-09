@@ -1,51 +1,42 @@
+
 package com.example.controller;
 
-import com.example.entity.Job;
+import com.example.dto.JobDto;
 import com.example.service.JobService;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/jobs")
-@RequiredArgsConstructor
+@RequestMapping("/jobs")
 public class JobController {
 
-    private final JobService jobService;
-
-    // DTO for creating/updating jobs with skillIds
-    @Data
-    static class JobRequest {
-        private Job job;
-        private List<Long> skillIds;
-    }
+    @Autowired
+    private JobService jobService;
 
     @PostMapping
-    public ResponseEntity<Job> createJob(@RequestBody JobRequest request) {
-        return ResponseEntity.ok(jobService.createJob(request.getJob(), request.getSkillIds()));
-    }
-
-    @GetMapping("get")
-    public ResponseEntity<List<Job>> getAllJobs() {
-        return ResponseEntity.ok(jobService.getAllJobs());
+    public ResponseEntity<JobDto> createJob(@RequestBody JobDto jobDto) {
+        return ResponseEntity.ok(jobService.createJob(jobDto));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Job> getJobById(@PathVariable Long id) {
-        return ResponseEntity.ok(jobService.getJobById(id));
+    public ResponseEntity<JobDto> getJobById(@PathVariable Long id) {
+        JobDto jobDto = jobService.getJobById(id);
+        if (jobDto != null) {
+            return ResponseEntity.ok(jobDto);
+        }
+        return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Job> updateJob(@PathVariable Long id, @RequestBody JobRequest request) {
-        return ResponseEntity.ok(jobService.updateJob(id, request.getJob(), request.getSkillIds()));
+    @GetMapping
+    public ResponseEntity<List<JobDto>> getAllJobs() {
+        return ResponseEntity.ok(jobService.getAllJobs());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteJob(@PathVariable Long id) {
-        jobService.deleteJob(id);
-        return ResponseEntity.ok("Job deleted successfully");
+    @GetMapping("/company/{companyId}")
+    public ResponseEntity<List<JobDto>> getJobsByCompanyId(@PathVariable Long companyId) {
+        return ResponseEntity.ok(jobService.getJobsByCompanyId(companyId));
     }
 }
