@@ -2,6 +2,9 @@
 
 # This script builds and starts all the microservices in the project.
 
+# --- Set JAVA_HOME ---
+export JAVA_HOME=/nix/store/8yqdr7xk055fgqjzhcjdspnf24w70qwp-zulu-ca-jdk-17.0.8.1
+
 # --- Prerequisites ---
 # - Java 17 or higher must be installed and JAVA_HOME configured.
 # - Maven must be installed to build the 'commonDTO' module. You can install it using your system's package manager (e.g., 'sudo apt-get install maven').
@@ -14,7 +17,7 @@ echo "Building all services..."
 
 # Build common libraries first
 echo "Building common..."
-(cd common && ./mvnw clean install)
+(cd common && mvn clean install)
 if [ $? -ne 0 ]; then
     echo "Failed to build common. Aborting."
     exit 1
@@ -32,7 +35,7 @@ fi
 for service in application-service auth-service company-service config-server discovery-server experience-service gateway-service job-service logging-service user-service; do
     if [ -d "$service" ]; then
         echo "Building $service..."
-        (cd "$service" && ./mvnw clean install)
+        (cd "$service" && ./mvnw clean install -Dmaven.wrapper.skipSha256Sum=true)
         if [ $? -ne 0 ]; then
             echo "Failed to build $service. Aborting."
             exit 1
