@@ -32,9 +32,6 @@ public class UserEntity {
     private String lastName;
 
     // ---- Relationships ----
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<UserSkills> userSkills;
 
     // Experiences are managed in experience-service; do not model relation here
 

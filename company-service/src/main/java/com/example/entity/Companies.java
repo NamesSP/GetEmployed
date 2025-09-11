@@ -30,12 +30,6 @@ public class Companies {
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    // ---- Relationships ----
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Recruiters> recruiters;
-
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Jobs> jobs;
 
     @PreUpdate
     protected void onUpdate() {

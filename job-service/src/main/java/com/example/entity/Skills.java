@@ -25,16 +25,5 @@ public class Skills {
     @Column(name = "category_id", nullable = false)
     private Long categoryId;
 
-    // ---- Relationships ----
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", insertable = false, updatable = false)
-    private Category category;
-
-    @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<UserSkills> userSkills;
-
-    @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<JobSkills> jobSkills;
+    
 }

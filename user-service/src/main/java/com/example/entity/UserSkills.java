@@ -28,10 +28,6 @@ public class UserSkills implements Serializable {
     @JsonIgnore
     private UserEntity user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "skill_id", insertable = false, updatable = false)
-    @JsonIgnore
-    private Skills skill;
 }
 
 // Composite key class

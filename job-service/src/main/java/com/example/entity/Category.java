@@ -22,8 +22,4 @@ public class Category {
     @NotBlank(message = "Category name cannot be blank")
     private String categoryName;
 
-    // ---- Relationships ----
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Skills> skills;
 }

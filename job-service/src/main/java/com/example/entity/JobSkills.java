@@ -19,14 +19,6 @@ public class JobSkills implements Serializable {
     @Column(name = "skill_id")
     private Long skillId;
 
-    // ---- Relationships ----
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_id", insertable = false, updatable = false)
-    private Jobs job;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "skill_id", insertable = false, updatable = false)
-    private Skills skill;
 }
 
 // Composite key class

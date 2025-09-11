@@ -48,20 +48,6 @@ public class Jobs {
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    // ---- Relationships ----
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "recruiter_id", insertable = false, updatable = false)
-    private Recruiters recruiter;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_id", insertable = false, updatable = false)
-    private Companies company;
-
-    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<JobSkills> jobSkills;
-
-    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Applications> applications;
 
     public enum JobStatus {
         OPEN, CLOSED
