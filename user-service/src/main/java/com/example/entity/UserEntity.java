@@ -31,18 +31,6 @@ public class UserEntity {
     @NotBlank(message = "LastName cannot be blank")
     private String lastName;
 
-    // ---- Relationships ----
-
-    // Experiences are managed in experience-service; do not model relation here
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Applications> applications;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Recruiters recruiter;
-
     // ---- Denormalized fields from auth-service for convenience ----
     @Column(nullable = true, length = 100)
     private String username; // fetched from auth-service
