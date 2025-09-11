@@ -1,7 +1,7 @@
 
 package com.example.service;
 
-import org.example.dto.UserDto;
+import com.example.dto.UserDto;
 import org.example.entity.User;
 import com.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public UserDto createUser(UserDto userDto) {
-        User user = new User();
+        UserDto user = new UserDto();
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
