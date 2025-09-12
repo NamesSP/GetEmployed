@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "auth-service", path = "/api/auth")
 public interface AuthServiceClient {
-
-    @GetMapping("/user-info/{username}")
+    @GetMapping(value = "/user-info/{username}", produces = "application/json")
     AuthUserInfoDto getUserInfoByUsername(@PathVariable("username") String username);
 
-    @GetMapping("/users/{id}/exists")
+    @GetMapping(value = "/users/{id}/exists", produces = "application/json")
     Boolean userExists(@PathVariable("id") Long id);
 
-    @GetMapping("/users/{id}/info")
+    @GetMapping(value = "/users/{id}/info", produces = "application/json")
     AuthUserInfoDto getUserInfoById(@PathVariable("id") Long id);
 }
 
