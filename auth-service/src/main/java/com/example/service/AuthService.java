@@ -11,7 +11,7 @@ import com.example.dto.LoginRequest;
 import com.example.dto.RegisterRequest;
 import com.example.dto.RegisterResponse;
 
-import com.example.entity.Role;
+import com.example.dto.Role;
 import com.example.entity.User;
 import com.example.repository.UserRepository;
 import com.example.util.JwtUtil;

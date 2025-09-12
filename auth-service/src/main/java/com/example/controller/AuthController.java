@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import com.example.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.dto.Role;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -25,7 +26,7 @@ public class AuthController {
     public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest request) {
         try {
             if (request.getRole() == null) {
-                request.setRole(com.example.entity.Role.SEEKER);
+                request.setRole(Role.SEEKER);
             }
             RegisterResponse response = authService.register(request);
             return ResponseEntity.ok(response);

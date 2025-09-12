@@ -32,11 +32,17 @@ public class UserService {
         return userRepository.findAll().stream().map(this::toDto).collect(Collectors.toList());
     }
 
+    public UserDto getUserByEmail(String email) {
+        return userRepository.findByEmail(email).map(this::toDto).orElse(null);
+    }
+
     private UserDto toDto(UserEntity user) {
         UserDto userDto = new UserDto();
         userDto.setId(user.getUserId());
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
+        userDto.setEmail(user.getEmail());
+        userDto.setRoles(user.getRole());
         return userDto;
     }
 
@@ -44,6 +50,8 @@ public class UserService {
         UserEntity userEntity = new UserEntity();
         userEntity.setFirstName(userDto.getFirstName());
         userEntity.setLastName(userDto.getLastName());
+        userEntity.setEmail(userDto.getEmail());
+        userEntity.setRole(userDto.getRoles());
         return userEntity;
     }
 }

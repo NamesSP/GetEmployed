@@ -3,10 +3,7 @@ package com.example.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import java.util.List;
 
 @Entity
 @Table(name = "user_profiles")
@@ -30,6 +27,9 @@ public class UserEntity {
     @Column(nullable = false, length = 100)
     @NotBlank(message = "LastName cannot be blank")
     private String lastName;
+
+    @Column(nullable = false, unique = true, length = 150)
+    private String email;
 
     // ---- Denormalized fields from auth-service for convenience ----
     @Column(nullable = true, length = 100)
