@@ -32,6 +32,7 @@ public class AuthService {
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 
+
     public RegisterResponse register(RegisterRequest request) {
         if (request.getRole() == Role.ADMIN) {
             throw new RuntimeException("Admin registration is not allowed");

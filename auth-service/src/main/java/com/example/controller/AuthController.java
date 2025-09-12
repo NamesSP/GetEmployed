@@ -4,11 +4,14 @@ import com.example.dto.AuthResponse;
 import com.example.dto.LoginRequest;
 import com.example.dto.RegisterRequest;
 import com.example.dto.RegisterResponse;
+import com.example.entity.User;
 import com.example.service.AuthService;
-import org.example.dto.AuthUserInfoDto;
+import com.example.dto.AuthUserInfoDto;
 
 import lombok.RequiredArgsConstructor;
 import com.example.repository.UserRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.dto.Role;
@@ -60,25 +63,35 @@ public class AuthController {
         }
     }
 
-    @GetMapping("/user-info/{username}")
-    public ResponseEntity<AuthUserInfoDto> getUserInfo(@PathVariable String username) {
-        try {
-            AuthUserInfoDto dto = authService.getUserInfoByUsername(username);
-            return ResponseEntity.ok(dto);
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    @GetMapping("/user-info/{username}")
+//    public ResponseEntity<AuthUserInfoDto> getUserInfo(@PathVariable String username) {
+//        try {
+//            AuthUserInfoDto dto = authService.getUserInfoByUsername(username);
+//            return ResponseEntity.ok();
+//        } catch (Exception e) {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
     @GetMapping("/users/{id}/exists")
     public ResponseEntity<Boolean> userExists(@PathVariable Long id) {
         return ResponseEntity.ok(userRepository.existsById(id));
     }
 
-    @GetMapping("/users/{id}/info")
-    public ResponseEntity<AuthUserInfoDto> getUserInfoById(@PathVariable Long id) {
-        return userRepository.findById(id)
-                .map(u -> ResponseEntity.ok(new AuthUserInfoDto(u.getId(), u.getUsername(), u.getRole().name())))
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping(value = "/users/info/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AuthUserInfoDto> getUserInfoById(@PathVariable("id") Long id) {
+        User u = userRepository.findById(id).get();
+        AuthUserInfoDto ob= new AuthUserInfoDto();
+        ob.setId(u.getId());
+        ob.setEmail(u.getUsername());
+        ob.setRole(u.getRole().name());
+        return new ResponseEntity<>(ob,HttpStatus.OK);
+//        return userRepository.findById(id)
+//                .map(u -> ResponseEntity.ok()
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .body(new AuthUserInfoDto(u.getId(), u.getUsername(), u.getRole().name())))
+//                .orElse(ResponseEntity.notFound().build());
     }
+
+
 }
