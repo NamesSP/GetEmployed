@@ -62,10 +62,11 @@ public class UserService {
     private UserDto toDto(UserEntity user) {
         UserDto userDto = new UserDto();
         userDto.setId(user.getUserId());
-        userDto.setAuthId(user.getAuthId()); // Add this
+        userDto.setAuthId(user.getAuthId());
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
         userDto.setEmail(user.getEmail());
+        userDto.setUsername(user.getUsername()); // ✅ ADDED: username field
         userDto.setRoles(user.getRole());
         return userDto;
     }
