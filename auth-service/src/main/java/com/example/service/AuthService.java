@@ -11,6 +11,7 @@ import com.example.dto.LoginRequest;
 import com.example.dto.RegisterRequest;
 import com.example.dto.RegisterResponse;
 import com.example.dto.Role;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.entity.User;
 import com.example.repository.UserRepository;
@@ -83,6 +84,11 @@ public class AuthService {
     public AuthUserInfoDto getUserInfoByUsername(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        return new AuthUserInfoDto(user.getId(), user.getEmail(), user.getUsername(), user.getRole().name());
+        AuthUserInfoDto dto = new AuthUserInfoDto();
+        dto.setId(user.getId());
+        dto.setEmail(user.getEmail());
+        dto.setUsername(user.getUsername());
+        dto.setRole(user.getRole().name());
+        return dto;
     }
 }

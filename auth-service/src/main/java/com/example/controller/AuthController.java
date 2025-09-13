@@ -80,17 +80,16 @@ public class AuthController {
 
     @GetMapping(value = "/users/info/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AuthUserInfoDto> getUserInfoById(@PathVariable("id") Long id) {
-        User u = userRepository.findById(id).get();
-        AuthUserInfoDto ob= new AuthUserInfoDto();
-        ob.setId(u.getId());
-        ob.setEmail(u.getUsername());
-        ob.setRole(u.getRole().name());
-        return new ResponseEntity<>(ob,HttpStatus.OK);
-//        return userRepository.findById(id)
-//                .map(u -> ResponseEntity.ok()
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .body(new AuthUserInfoDto(u.getId(), u.getUsername(), u.getRole().name())))
-//                .orElse(ResponseEntity.notFound().build());
+        return userRepository.findById(id)
+                .map(u -> {
+                    AuthUserInfoDto dto = new AuthUserInfoDto();
+                    dto.setId(u.getId());
+                    dto.setEmail(u.getEmail()); // ✅ FIXED: was u.getUsername()
+                    dto.setUsername(u.getUsername()); // ✅ ADDED: missing username
+                    dto.setRole(u.getRole().name());
+                    return ResponseEntity.ok(dto);
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 
 
