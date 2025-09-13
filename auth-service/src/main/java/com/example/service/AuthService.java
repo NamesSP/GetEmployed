@@ -6,12 +6,12 @@ package com.example.service;
 //import org.example.dto.RegisterRequest;
 //import org.example.dto.RegisterResponse;
 import com.example.dto.AuthResponse;
-import org.example.dto.AuthUserInfoDto;
+import com.example.dto.AuthUserInfoDto;
 import com.example.dto.LoginRequest;
 import com.example.dto.RegisterRequest;
 import com.example.dto.RegisterResponse;
-
 import com.example.dto.Role;
+
 import com.example.entity.User;
 import com.example.repository.UserRepository;
 import com.example.util.JwtUtil;
@@ -83,6 +83,6 @@ public class AuthService {
     public AuthUserInfoDto getUserInfoByUsername(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        return new AuthUserInfoDto(user.getId(), user.getUsername(), user.getRole().name());
+        return new AuthUserInfoDto(user.getId(), user.getEmail(), user.getUsername(), user.getRole().name());
     }
 }
