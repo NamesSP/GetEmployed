@@ -26,10 +26,24 @@ public class UserService {
             throw new IllegalArgumentException("authId is required");
         }
 
+        // Check if authId already exists in user_profiles table
+        Optional<UserEntity> existingUser = userRepository.findByAuthId(userDto.getAuthId());
+        if (existingUser.isPresent()) {
+            throw new IllegalStateException("User profile already exists for authId: " + userDto.getAuthId());
+        }
+
+        // Check if authId exists in auth-service users table
+        Boolean userExists = authServiceClient.userExists(userDto.getAuthId());
+        if (userExists == null || !userExists) {
+            throw new IllegalStateException(
+                    "Invalid authId: " + userDto.getAuthId() + ". User does not exist in auth-service.");
+        }
+
         // Fetch user info from auth-service
         AuthUserInfoDto authInfo = authServiceClient.getUserInfoById(userDto.getAuthId());
         if (authInfo == null) {
-            throw new IllegalStateException("No user found in auth-service with authId: " + userDto.getAuthId());
+            throw new IllegalStateException(
+                    "Failed to fetch user information from auth-service for authId: " + userDto.getAuthId());
         }
 
         UserEntity newUser = new UserEntity();
@@ -62,22 +76,13 @@ public class UserService {
     private UserDto toDto(UserEntity user) {
         UserDto userDto = new UserDto();
         userDto.setId(user.getUserId());
-        userDto.setAuthId(user.getAuthId());
+        userDto.setAuthId(user.getAuthId()); // Add this
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
+        userDto.setUsername(user.getUsername());
         userDto.setEmail(user.getEmail());
-        userDto.setUsername(user.getUsername()); // ✅ ADDED: username field
         userDto.setRoles(user.getRole());
         return userDto;
     }
 
-    private UserEntity toEntity(UserDto userDto) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setAuthId(userDto.getAuthId()); // Add this
-        userEntity.setFirstName(userDto.getFirstName());
-        userEntity.setLastName(userDto.getLastName());
-        userEntity.setEmail(userDto.getEmail());
-        userEntity.setRole(userDto.getRoles());
-        return userEntity;
-    }
 }
