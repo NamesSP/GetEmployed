@@ -17,4 +17,6 @@ public class Skills {
 
     @Column(name = "category_id", nullable = false)
     private Long categoryId;
+
+
 }
