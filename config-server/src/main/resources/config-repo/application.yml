@@ -4,7 +4,8 @@ spring:
     url: jdbc:mysql://localhost:3306/getemployed
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: pass@word1
+    # password: pass@word1
+    password: Sppratham420s
   jpa:
     hibernate:
       ddl-auto: update
