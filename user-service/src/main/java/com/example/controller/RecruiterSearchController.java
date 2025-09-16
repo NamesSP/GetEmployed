@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/recruiter/search")
 public class RecruiterSearchController {
 
-    private static class SearchRequest {
+    public static class SearchRequest {
         public List<Long> skillIds;
         public long minYearsExperience;
     }
