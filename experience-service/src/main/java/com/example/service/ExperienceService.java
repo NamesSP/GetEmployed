@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.client.UserServiceClient;
+import com.example.client.AuthServiceClient;
 import com.example.dto.ExperienceDto;
 import com.example.entity.Experience;
 import com.example.repository.ExperienceRepository;
@@ -19,7 +19,7 @@ public class ExperienceService {
     ExperienceRepository experienceRepository;
 
     @Autowired
-    UserServiceClient userServiceClient;
+    AuthServiceClient authServiceClient;
     
 
 
@@ -40,7 +40,7 @@ public class ExperienceService {
         }
         
         try {
-            Boolean userExists = userServiceClient.userExists(experience.getUserId());
+            Boolean userExists = authServiceClient.userExists(experience.getUserId());
             if (Boolean.FALSE.equals(userExists)) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User does not exist for userId " + experience.getUserId());
             }
@@ -57,7 +57,7 @@ public class ExperienceService {
         return experienceRepository.findById(id).map(existing -> {
             if (updatedExperience.getUserId() != null) {
                 try {
-                    Boolean userExists = userServiceClient.userExists(updatedExperience.getUserId());
+                    Boolean userExists = authServiceClient.userExists(updatedExperience.getUserId());
                     if (Boolean.FALSE.equals(userExists)) {
                         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User does not exist for userId " + updatedExperience.getUserId());
                     }
@@ -137,7 +137,7 @@ public class ExperienceService {
         }
         
         try {
-            Boolean userExists = userServiceClient.userExists(experience.getUserId());
+            Boolean userExists = authServiceClient.userExists(experience.getUserId());
             if (Boolean.FALSE.equals(userExists)) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User does not exist for userId " + experience.getUserId());
             }
@@ -154,7 +154,7 @@ public class ExperienceService {
         return experienceRepository.findById(id).map(existing -> {
             if (updatedExperience.getUserId() != null) {
                 try {
-                    Boolean userExists = userServiceClient.userExists(updatedExperience.getUserId());
+                    Boolean userExists = authServiceClient.userExists(updatedExperience.getUserId());
                     if (Boolean.FALSE.equals(userExists)) {
                         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User does not exist for userId " + updatedExperience.getUserId());
                     }

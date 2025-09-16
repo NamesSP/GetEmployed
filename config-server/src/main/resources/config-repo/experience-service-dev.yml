@@ -1,7 +1,4 @@
-# Job Service specific configuration
 spring:
-  application:
-    name: job-service
   datasource:
     url: jdbc:mysql://localhost:3306/getemployed
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -12,10 +9,5 @@ spring:
       ddl-auto: update
     show-sql: true
 
-server:
-  port: 8084
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+  server:
+    port: 8086
