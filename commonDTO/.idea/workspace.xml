@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1c0bcbe-ab65-406a-8722-999857c2af50" name="Changes" comment="">
+
       <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommonApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommonApplication.java" afterDir="false" />
@@ -22,6 +23,7 @@
       <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/repository/JobSkillRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/repository/JobSkillRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/service/JobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/service/JobService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../run-services.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/../run-services.ps1" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,12 +46,12 @@
     &quot;assignee&quot;: &quot;priyamshu11&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/NamesSP/GetEmployed.git&quot;,
-    &quot;accountId&quot;: &quot;3b23ec04-43d7-47d9-a988-eadc692c5d27&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/NamesSP/GetEmployed.git",
+    "accountId": "6a9eb726-996b-4ce8-9f46-665cd5c43ce8"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -65,9 +67,11 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "firebasesrujan",
+
+    "git-widget-placeholder": "userservicetestn",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Administrator/GetEmployed/commonDTO",
+    "last_opened_file_path": "C:/Users/Administrator/Desktop/SpringBoot/GetEmployed/commonDTO",
+
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
