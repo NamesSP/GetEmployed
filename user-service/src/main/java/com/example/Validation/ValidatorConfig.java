@@ -10,6 +10,7 @@ import org.springframework.validation.beanvalidation.SpringConstraintValidatorFa
 public class ValidatorConfig {
     @Bean
     public LocalValidatorFactoryBean validator() {
+
         return new LocalValidatorFactoryBean();
     }
 

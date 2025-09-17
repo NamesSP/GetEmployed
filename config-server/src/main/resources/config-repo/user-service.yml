@@ -3,7 +3,7 @@ spring:
     name: user-service
 
 server:
-  port: 8081   # Default, can override in profiles
+  port: 8090   # Default, can override in profiles
 
 
 eureka:
