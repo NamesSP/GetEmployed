@@ -5,32 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1c0bcbe-ab65-406a-8722-999857c2af50" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../application-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../application-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../application-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../application-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/src/main/java/com/example/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/src/main/java/com/example/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/src/main/java/com/example/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/src/main/java/com/example/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/dto/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../company-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../company-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../company-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../company-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-repo/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-repo/.idea/config-repo.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-repo/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-repo/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-repo/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-repo/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-repo/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-server/src/main/java/com/example/ConfigServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/java/com/example/ConfigServerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../experience-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../experience-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../experience-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../experience-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,12 +29,12 @@
     &quot;assignee&quot;: &quot;priyamshu11&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/NamesSP/GetEmployed.git&quot;,
-    &quot;accountId&quot;: &quot;3b23ec04-43d7-47d9-a988-eadc692c5d27&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/NamesSP/GetEmployed.git",
+    "accountId": "6a9eb726-996b-4ce8-9f46-665cd5c43ce8"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -74,9 +50,9 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "firebase2",
+    "git-widget-placeholder": "userservicetestn",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Sony_Course/GetEmployed/discovery-server",
+    "last_opened_file_path": "C:/Users/Administrator/Desktop/SpringBoot/GetEmployed/commonDTO",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
