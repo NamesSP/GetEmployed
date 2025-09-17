@@ -3,6 +3,7 @@ package com.example.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -34,6 +35,10 @@ public class Jobs {
 
     @Min(value = 0, message = "Openings must be non-negative")
     private Integer openings;
+
+    @Column(name = "description")
+    @NotBlank
+    private String description;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
