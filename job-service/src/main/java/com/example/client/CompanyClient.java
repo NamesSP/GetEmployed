@@ -6,9 +6,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "company-service", url = "http://localhost:8082")
+@FeignClient(name = "company-service", path = "/companies")
 public interface CompanyClient {
 
-    @GetMapping("/companies/{id}")
+    @GetMapping("/{id}")
     CompanyDto getCompanyById(@PathVariable("id") Long id);
 }

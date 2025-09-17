@@ -2,13 +2,10 @@ package com.example.client;
 
 
 import com.example.dto.AuthUserInfoDto;
-import com.example.dto.ValidateTokenResponse;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
 
 @FeignClient(name = "auth-service", path = "/api/auth")
 public interface AuthServiceClient {

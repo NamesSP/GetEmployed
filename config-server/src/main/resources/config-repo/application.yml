@@ -24,7 +24,9 @@ logging:
     org.springframework.security: DEBUG
     com.example: DEBUG
 
-
+auth:
+  interceptor:
+    enabled: true
 ## Global configuration for all services
 #spring:
 #  datasource:

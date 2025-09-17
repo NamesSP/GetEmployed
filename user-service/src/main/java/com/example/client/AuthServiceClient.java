@@ -2,7 +2,6 @@ package com.example.client;
 
 
 import com.example.dto.AuthUserInfoDto;
-import com.example.dto.ValidateTokenResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -23,9 +22,6 @@ public interface AuthServiceClient {
 
     @GetMapping(value = "/users/info/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     AuthUserInfoDto getUserInfoById(@PathVariable("id") Long id);
-
-    @GetMapping(value = "/validate", produces = "application/json")
-    ValidateTokenResponse validate(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader);
 
 }
 
