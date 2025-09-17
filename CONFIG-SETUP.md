@@ -51,6 +51,12 @@ To change database credentials or any other configuration:
 - **Global Configuration**: `config-repo/application.yml` - Common settings for all services
 - **Service-Specific**: `config-repo/{service-name}.yml` - Service-specific overrides
 
+## Dependencies
+ - spring cloud config server
+ 
+## Annotations
+- @EnableConfigServer in config Main Application 
+
 ## Benefits
 
 1. **Single Source of Truth**: All configurations in one place
@@ -73,7 +79,7 @@ You can test the configuration by accessing:
 
 1. **Config Server not starting**: Check if port 8888 is available
 2. **Services can't connect**: Ensure Config Server is running first
-3. **Configuration not loading**: Check bootstrap.properties files
+3. **Configuration not loading**: Check application.properties files
 
 ## Next Steps
 

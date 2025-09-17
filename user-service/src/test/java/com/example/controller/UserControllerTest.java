@@ -1,10 +1,10 @@
-package com.example.entity;
+package com.example.controller;
 
 import com.example.UserServiceApplication;
 import com.example.client.AuthServiceClient;
-import com.example.controller.UserController;
 import com.example.dto.AuthUserInfoDto;
 import com.example.dto.UserDto;
+import com.example.entity.UserEntity;
 import com.example.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
