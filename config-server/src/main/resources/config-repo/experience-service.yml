@@ -13,6 +13,7 @@ spring:
       ddl-auto: update
     show-sql: true
 
+
 server:
   port: 8086
 
@@ -29,3 +30,12 @@ jwt:
 auth:
   interceptor:
     enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
