@@ -7,15 +7,22 @@ import com.example.dto.AuthUserInfoDto;
 import com.example.dto.UserDto;
 import com.example.entity.UserEntity;
 import com.example.repository.UserRepository;
+import com.example.service.UserService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
 
+
+import java.util.List;
 import java.util.Optional;
 
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
     @SpringBootTest(classes = UserServiceApplication.class)
@@ -29,6 +36,25 @@ import static org.mockito.Mockito.when;
 
         @MockBean
         private AuthServiceClient authServiceClient;
+
+
+
+        @Autowired
+        private UserService userService; // mock the service
+
+        private UserDto sampleUser;
+
+        @BeforeEach
+        void setUp() {
+            sampleUser = new UserDto();
+            sampleUser.setId(1L);
+            sampleUser.setAuthId(101L);
+            sampleUser.setFirstName("John");
+            sampleUser.setLastName("Doe");
+            sampleUser.setEmail("john@example.com");
+            sampleUser.setUsername("johndoe");
+            sampleUser.setRoles("USER");
+        }
 
         @Test
         void testCreateUser_Success() {
@@ -76,23 +102,14 @@ import static org.mockito.Mockito.when;
 
         @Test
         void testCreateUser_Failure_MissingAuthId() {
-            try {
-                UserDto userDto = new UserDto();
-                userDto.setFirstName("Jane");
+            UserDto userDto = new UserDto();
+            userDto.setFirstName("Jane");
 
-                // when
-                ResponseEntity<UserDto> response = userController.createUser(userDto);
+            ResponseEntity<UserDto> response = userController.createUser(userDto);
 
-                // ❌ should never reach here because service throws exception
-                fail("Expected failure due to missing authId but got response: " + response);
-
-            } catch (IllegalArgumentException e) {
-                assertEquals("authId is required", e.getMessage());
-            } catch (Exception e) {
-                fail("Unexpected exception: " + e.getMessage());
-            }
+            assertEquals(400, response.getStatusCodeValue());
+            assertNull(response.getBody());
         }
-
 
     }
 

@@ -15,13 +15,7 @@ public class ValidatorConfig {
     }
 
 
-//        @Bean
-//        public LocalValidatorFactoryBean validatorFactory(ApplicationContext applicationContext) {
-//            LocalValidatorFactoryBean factoryBean = new LocalValidatorFactoryBean();
-//            factoryBean.setConstraintValidatorFactory(
-//                    new SpringConstraintValidatorFactory(applicationContext.getAutowireCapableBeanFactory()));
-//            return factoryBean;
-//        }
+
 
 
 
