@@ -1,88 +1,88 @@
+
 package com.example.service;
 
 import com.example.client.AuthServiceClient;
+import com.example.dto.UserDto;
 import com.example.entity.UserEntity;
-import com.example.exceptions.DuplicateFieldException;
 import com.example.repository.UserRepository;
+import com.example.dto.AuthUserInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private AuthServiceClient authServiceClient;
 
-    // Create
-    public UserEntity createUser(UserEntity user) {
-        if (user.getAuthId() == null || Boolean.FALSE.equals(authServiceClient.userExists(user.getAuthId()))) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Auth user does not exist for authId " + user.getAuthId());
+    public UserDto createUser(UserDto userDto) {
+        if (userDto.getAuthId() == null) {
+            throw new IllegalArgumentException("authId is required");
         }
-        // If profile already exists for this authId, reject as duplicate
-        var existing = userRepository.findByAuthId(user.getAuthId());
-        if (existing.isPresent()) {
-            throw new DuplicateFieldException("authId",
-                    "User profile already exists for authId " + user.getAuthId());
+
+        // Check if authId already exists in user_profiles table
+        Optional<UserEntity> existingUser = userRepository.findByAuthId(userDto.getAuthId());
+        if (existingUser.isPresent()) {
+            throw new IllegalStateException("User profile already exists for authId: " + userDto.getAuthId());
         }
-        try {
-            var info = authServiceClient.getUserInfoById(user.getAuthId());
-            if (info != null) {
-                user.setUsername(info.getUsername());
-                user.setRole(info.getRole());
-            }
-        } catch (Exception ignored) {
+
+        // Check if authId exists in auth-service users table
+        Boolean userExists = authServiceClient.userExists(userDto.getAuthId());
+        if (userExists == null || !userExists) {
+            throw new IllegalStateException(
+                    "Invalid authId: " + userDto.getAuthId() + ". User does not exist in auth-service.");
         }
-        return userRepository.save(user);
-    }
 
-    // get AlL
-    public List<UserEntity> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    // getByID
-    public Optional<UserEntity> getUserById(Long userId) {
-        return userRepository.findById(userId);
-    }
-
-    // Update userEntity
-    public UserEntity updateUser(UserEntity user) {
-        if (user.getAuthId() != null) {
-            if (Boolean.FALSE.equals(authServiceClient.userExists(user.getAuthId()))) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                        "Auth user does not exist for authId " + user.getAuthId());
-            }
-            userRepository.findByAuthId(user.getAuthId()).ifPresent(existing -> {
-                if (!existing.getUserId().equals(user.getUserId())) {
-                    throw new DuplicateFieldException("authId",
-                            "User profile already exists for authId " + user.getAuthId());
-                }
-            });
-            try {
-                var info = authServiceClient.getUserInfoById(user.getAuthId());
-                if (info != null) {
-                    user.setUsername(info.getUsername());
-                    user.setRole(info.getRole());
-                }
-            } catch (Exception ignored) {
-            }
+        // Fetch user info from auth-service
+        AuthUserInfoDto authInfo = authServiceClient.getUserInfoById(userDto.getAuthId());
+        if (authInfo == null) {
+            throw new IllegalStateException(
+                    "Failed to fetch user information from auth-service for authId: " + userDto.getAuthId());
         }
-        return userRepository.save(user);
+
+        UserEntity newUser = new UserEntity();
+        newUser.setAuthId(userDto.getAuthId());
+        newUser.setFirstName(userDto.getFirstName());
+        newUser.setLastName(userDto.getLastName());
+
+        // Populate from auth-service
+        newUser.setEmail(authInfo.getEmail());
+        newUser.setUsername(authInfo.getUsername());
+        newUser.setRole(authInfo.getRole());
+
+        userRepository.save(newUser);
+        return toDto(newUser);
     }
 
-    // DeleteById
-    public void deleteUser(Long userId) {
-        userRepository.deleteById(userId);
+    public UserDto getUserById(Long id) {
+        Optional<UserEntity> user = userRepository.findByAuthId(id);
+        return user.map(this::toDto).orElse(null);
     }
 
-    public boolean userExists(Long userId) {
-        return userRepository.existsById(userId);
+    public List<UserDto> getAllUsers() {
+        return userRepository.findAll().stream().map(this::toDto).collect(Collectors.toList());
     }
+
+    public UserDto getUserByEmail(String email) {
+        return userRepository.findByEmail(email).map(this::toDto).orElse(null);
+    }
+
+    private UserDto toDto(UserEntity user) {
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getUserId());
+        userDto.setAuthId(user.getAuthId()); // Add this
+        userDto.setFirstName(user.getFirstName());
+        userDto.setLastName(user.getLastName());
+        userDto.setUsername(user.getUsername());
+        userDto.setEmail(user.getEmail());
+        userDto.setRoles(user.getRole());
+        return userDto;
+    }
+
 }

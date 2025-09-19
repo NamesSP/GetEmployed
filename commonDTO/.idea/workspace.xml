@@ -5,49 +5,56 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1c0bcbe-ab65-406a-8722-999857c2af50" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/AppTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/src/main/java/com/example/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/src/main/java/com/example/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/src/main/java/com/example/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/src/main/java/com/example/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../common/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../common/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../common/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../common/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../common/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../common/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../common/src/main/java/com/example/CommonApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../common/src/main/java/com/example/dto/AuthUserInfoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/dto/AuthUserInfoDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../common/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../common/src/test/java/com/example/CommonApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user-service/src/main/java/com/example/client/AuthServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/src/main/java/com/example/client/AuthServiceClient.java" afterDir="false" />
+
+      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommonApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommonApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/application-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/application-service.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/auth-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/auth-service.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/company-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/company-service.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/experience-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/experience-service.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/job-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/job-service.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../experience-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../experience-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../job-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/entity/Job.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/entity/JobSkill.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/entity/JobSkill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/entity/Jobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/entity/Jobs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/repository/JobRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/repository/JobRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/repository/JobSkillRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/repository/JobSkillRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/service/JobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/service/JobService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../run-services.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/../run-services.ps1" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "priyamshu11"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;priyamshu11&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/NamesSP/GetEmployed.git",
-    "accountId": "3b23ec04-43d7-47d9-a988-eadc692c5d27"
+    "accountId": "6a9eb726-996b-4ce8-9f46-665cd5c43ce8"
   }
 }]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="32PIqj3FBJHnyT11WpkptWKnety" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -55,10 +62,19 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.CommonApplication.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "trial",
-    "kotlin-language-version-configured": "true"
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+
+    "git-widget-placeholder": "userservicetestn",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Administrator/Desktop/SpringBoot/GetEmployed/commonDTO",
+
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
   <component name="RecentsManager">

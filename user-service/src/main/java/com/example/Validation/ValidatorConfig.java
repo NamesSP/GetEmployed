@@ -10,17 +10,12 @@ import org.springframework.validation.beanvalidation.SpringConstraintValidatorFa
 public class ValidatorConfig {
     @Bean
     public LocalValidatorFactoryBean validator() {
+
         return new LocalValidatorFactoryBean();
     }
 
 
-//        @Bean
-//        public LocalValidatorFactoryBean validatorFactory(ApplicationContext applicationContext) {
-//            LocalValidatorFactoryBean factoryBean = new LocalValidatorFactoryBean();
-//            factoryBean.setConstraintValidatorFactory(
-//                    new SpringConstraintValidatorFactory(applicationContext.getAutowireCapableBeanFactory()));
-//            return factoryBean;
-//        }
+
 
 
 

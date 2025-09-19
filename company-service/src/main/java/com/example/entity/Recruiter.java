@@ -2,15 +2,13 @@ package com.example.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
-
 
 @Data
 @Entity
-@Table(name="recruiter")
+@Table(name = "recruiter")
 public class Recruiter {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long recruiterId;
 
     private String recruiterName;
@@ -18,7 +16,6 @@ public class Recruiter {
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "companyId", referencedColumnName = "companyId", nullable = false)
+    @JoinColumn(name = "company_id", referencedColumnName = "id", nullable = false)
     private Company company;
-
 }

@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.entity.Category;
 import com.example.entity.Skills;
+import com.example.entity.UserSkills;
 import com.example.service.CategoryService;
 import com.example.service.SkillsService;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class AdminSkillsController {
     }
 
     @GetMapping("/by-category/{categoryId}")
-    public ResponseEntity<List<Skills>> listSkillsByCategory(@PathVariable Long categoryId) {
+    public ResponseEntity<List<UserSkills>> listSkillsByCategory(@PathVariable Long categoryId) {
         return ResponseEntity.ok(skillsService.getSkillsByCategory(categoryId));
     }
 }

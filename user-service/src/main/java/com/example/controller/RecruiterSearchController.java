@@ -2,6 +2,8 @@ package com.example.controller;
 
 import com.example.dto.SeekerMatchDto;
 import com.example.service.RecruiterSearchService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,12 +13,13 @@ import java.util.List;
 @RequestMapping("/recruiter/search")
 public class RecruiterSearchController {
 
-    private static class SearchRequest {
+    public static class SearchRequest {
         public List<Long> skillIds;
         public long minYearsExperience;
     }
 
-    private final RecruiterSearchService searchService;
+    @Autowired
+    RecruiterSearchService searchService;
 
     public RecruiterSearchController(RecruiterSearchService searchService) {
         this.searchService = searchService;
@@ -24,8 +27,22 @@ public class RecruiterSearchController {
 
     @PostMapping
     public ResponseEntity<List<SeekerMatchDto>> search(@RequestBody SearchRequest request) {
-        return ResponseEntity.ok(searchService.findSeekersBySkillsAndExperience(
-                request.skillIds == null ? List.of() : request.skillIds,
-                request.minYearsExperience));
+        try {
+            List<Long> skillIds = request.skillIds; // Keep null as null, don't convert to empty list
+            long minYearsExperience = request.minYearsExperience;
+
+            System.out.println(
+                    "Recruiter search request - Skill IDs: " + skillIds + ", Min Experience: " + minYearsExperience);
+
+            List<SeekerMatchDto> results = searchService.findSeekersBySkillsAndExperience(skillIds, minYearsExperience);
+
+            System.out.println("Found " + results.size() + " matching seekers");
+
+            return ResponseEntity.ok(results);
+        } catch (Exception e) {
+            System.err.println("Error in recruiter search: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }

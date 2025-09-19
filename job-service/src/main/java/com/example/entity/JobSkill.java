@@ -21,7 +21,7 @@ public class JobSkill {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id", nullable = false)
     @JsonBackReference
-    private Job job;
+    private Jobs job;
 
     private Long skillId; // FK → Skills.skill_id (stored as ID, fetched from skill-service)
 }

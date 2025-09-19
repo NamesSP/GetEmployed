@@ -1,78 +1,62 @@
+
 package com.example.service;
 
-import com.example.entity.Job;
-import com.example.entity.JobSkill;
-import com.example.entity.JobStatus;
+import com.example.client.CompanyClient;
+import com.example.dto.JobDto;
+import com.example.entity.Jobs;
 import com.example.repository.JobRepository;
-import com.example.repository.JobSkillRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class JobService {
 
-    private final JobRepository jobRepository;
-    private final JobSkillRepository jobSkillRepository;
+    @Autowired
+    private JobRepository jobRepository;
 
-    // Create Job with skills
-    public Job createJob(Job job, List<Long> skillIds) {
-        job.setPostedOn(LocalDateTime.now());
-        job.setCreatedAt(LocalDateTime.now());
-        job.setUpdatedAt(LocalDateTime.now());
+    @Autowired
+    private CompanyClient companyClient;
 
-        Job savedJob = jobRepository.save(job);
+    public JobDto createJob(JobDto jobDto) {
+        Jobs job = toEntity(jobDto);
+        job = jobRepository.save(job);
+        return toDto(job);
+    }
 
-        // Add skills
-        for (Long skillId : skillIds) {
-            JobSkill jobSkill = JobSkill.builder()
-                    .job(savedJob)
-                    .skillId(skillId)
-                    .build();
-            jobSkillRepository.save(jobSkill);
+    public JobDto getJobById(Long id) {
+        Jobs job = jobRepository.findById(id).orElse(null);
+        if (job != null) {
+            return toDto(job);
         }
-
-        return savedJob;
+        return null;
     }
 
-    public List<Job> getAllJobs() {
-        return jobRepository.findAll();
+    public List<JobDto> getAllJobs() {
+        return jobRepository.findAll().stream().map(this::toDto).collect(Collectors.toList());
     }
 
-    public Job getJobById(Long jobId) {
-        return jobRepository.findById(jobId)
-                .orElseThrow(() -> new RuntimeException("Job not found"));
+    public List<JobDto> getJobsByCompanyId(Long companyId) {
+        return jobRepository.findByCompanyId(companyId).stream().map(this::toDto).collect(Collectors.toList());
     }
 
-    public Job updateJob(Long jobId, Job jobUpdate, List<Long> skillIds) {
-        Job existing = getJobById(jobId);
-
-        existing.setPosition(jobUpdate.getPosition());
-        existing.setRequiredYearsExperience(jobUpdate.getRequiredYearsExperience());
-        existing.setOpenings(jobUpdate.getOpenings());
-        existing.setStatus(jobUpdate.getStatus());
-        existing.setUpdatedAt(LocalDateTime.now());
-
-        Job updatedJob = jobRepository.save(existing);
-
-        // Update skills
-        jobSkillRepository.deleteAll(jobSkillRepository.findByJobJobId(jobId));
-        for (Long skillId : skillIds) {
-            JobSkill jobSkill = JobSkill.builder()
-                    .job(updatedJob)
-                    .skillId(skillId)
-                    .build();
-            jobSkillRepository.save(jobSkill);
-        }
-
-        return updatedJob;
+    private JobDto toDto(Jobs job) {
+        JobDto jobDto = new JobDto();
+        jobDto.setId(job.getJobId());
+        jobDto.setTitle(job.getPosition());
+        jobDto.setDescription(job.getDescription());
+        jobDto.setCompanyId(job.getCompanyId());
+        jobDto.setCompany(companyClient.getCompanyById(job.getCompanyId()));
+        return jobDto;
     }
 
-    public void deleteJob(Long jobId) {
-        jobSkillRepository.deleteAll(jobSkillRepository.findByJobJobId(jobId));
-        jobRepository.deleteById(jobId);
+    private Jobs toEntity(JobDto jobDto) {
+        Jobs job = new Jobs();
+        job.setPosition(jobDto.getTitle());
+        job.setDescription(jobDto.getDescription());
+        job.setCompanyId(jobDto.getCompanyId());
+        return job;
     }
 }

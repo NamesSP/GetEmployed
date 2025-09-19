@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.entity.Role;
+import com.example.dto.Role;
 import com.example.entity.User;
 import com.example.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;

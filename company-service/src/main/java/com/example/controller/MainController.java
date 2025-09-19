@@ -1,16 +1,15 @@
 package com.example.controller;
 
-import com.example.dto.RecruiterRequest;
-import com.example.entity.Company;
+import com.example.dto.CompanyDto;
 import com.example.entity.Recruiter;
 import com.example.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
 @RestController
 @RequestMapping("/company")
 public class MainController {
@@ -21,30 +20,27 @@ public class MainController {
     // ----------------- Company -----------------
 
     @GetMapping
-    public List<Company> getAllCompanies() {
+    public List<CompanyDto> getAllCompanies() {
         return companyService.getAllCompanies();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getCompanyById(@PathVariable Long id) {
-        return companyService.getCompanyById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> (ResponseEntity<Company>) ResponseEntity.status(HttpStatus.NOT_FOUND));
+    public ResponseEntity<CompanyDto> getCompanyById(@PathVariable Long id) {
+        CompanyDto dto = companyService.getCompanyById(id);
+        if (dto != null) {
+            return ResponseEntity.ok(dto);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public Company createCompany(@RequestBody Company company) {
+    public CompanyDto createCompany(@RequestBody CompanyDto company) {
         return companyService.createCompany(company);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateCompany(@PathVariable Long id, @RequestBody Company companyDetails) {
-        try {
-            Company updatedCompany = companyService.updateCompany(id, companyDetails);
-            return ResponseEntity.ok("Company updated successfully: " + updatedCompany.getCompanyName());
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(404).body("Company not found!");
-        }
+    public ResponseEntity<CompanyDto> updateCompany(@PathVariable Long id, @RequestBody CompanyDto companyDetails) {
+        return ResponseEntity.ok(companyService.updateCompany(id, companyDetails));
     }
 
     @DeleteMapping("/{id}")
@@ -61,7 +57,7 @@ public class MainController {
     }
 
     @PostMapping("/recruiter")
-    public ResponseEntity<Recruiter> addRecruiter(@RequestBody RecruiterRequest recruiter) {
+    public ResponseEntity<Recruiter> addRecruiter(@RequestBody Recruiter recruiter) {
         return ResponseEntity.ok(companyService.createRecruiter(recruiter));
     }
 

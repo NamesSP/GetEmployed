@@ -1,11 +1,18 @@
 package com.example.service;
 
+//import org.example.dto.AuthResponse;
+//import org.example.dto.AuthUserInfoDto;
+//import org.example.dto.LoginRequest;
+//import org.example.dto.RegisterRequest;
+//import org.example.dto.RegisterResponse;
 import com.example.dto.AuthResponse;
-import org.example.dto.AuthUserInfoDto;
+import com.example.dto.AuthUserInfoDto;
 import com.example.dto.LoginRequest;
 import com.example.dto.RegisterRequest;
 import com.example.dto.RegisterResponse;
-import com.example.entity.Role;
+import com.example.dto.Role;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.example.entity.User;
 import com.example.repository.UserRepository;
 import com.example.util.JwtUtil;
@@ -25,6 +32,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
+
 
     public RegisterResponse register(RegisterRequest request) {
         if (request.getRole() == Role.ADMIN) {
@@ -76,6 +84,11 @@ public class AuthService {
     public AuthUserInfoDto getUserInfoByUsername(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        return new AuthUserInfoDto(user.getId(), user.getUsername(), user.getRole().name());
+        AuthUserInfoDto dto = new AuthUserInfoDto();
+        dto.setId(user.getId());
+        dto.setEmail(user.getEmail());
+        dto.setUsername(user.getUsername());
+        dto.setRole(user.getRole().name());
+        return dto;
     }
 }
