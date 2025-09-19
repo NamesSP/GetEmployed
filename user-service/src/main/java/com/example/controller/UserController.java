@@ -20,7 +20,15 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
-        return ResponseEntity.ok(userService.createUser(userDto));
+        //modified to catch 2 different types of err -prym cr
+        try {
+            return ResponseEntity.ok(userService.createUser(userDto));
+        }
+        catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build(); // 400
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(409).build(); // 409 Conflict
+        }
     }
 
     @GetMapping("/{authId}")
