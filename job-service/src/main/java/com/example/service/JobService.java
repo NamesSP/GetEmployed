@@ -3,8 +3,10 @@ package com.example.service;
 
 import com.example.client.CompanyClient;
 import com.example.dto.JobDto;
+import com.example.entity.JobSkill;
 import com.example.entity.Jobs;
 import com.example.repository.JobRepository;
+import com.example.repository.JobSkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 public class JobService {
 
     @Autowired
+    JobSkillRepository jobSkillRepository;
+    @Autowired
     private JobRepository jobRepository;
 
     @Autowired
@@ -23,6 +27,15 @@ public class JobService {
     public JobDto createJob(JobDto jobDto) {
         Jobs job = toEntity(jobDto);
         job = jobRepository.save(job);
+
+        if (jobDto.getSkillIds() != null) {
+            for (Long skillId : jobDto.getSkillIds()) {
+                JobSkill jobSkill = new JobSkill();
+                jobSkill.setJob(job);
+                jobSkill.setSkillId(skillId);
+                jobSkillRepository.save(jobSkill);
+            }
+        }
         return toDto(job);
     }
 
@@ -49,6 +62,19 @@ public class JobService {
         jobDto.setDescription(job.getDescription());
         jobDto.setCompanyId(job.getCompanyId());
         jobDto.setCompany(companyClient.getCompanyById(job.getCompanyId()));
+        jobDto.setPostedOn(job.getPostedOn());
+        jobDto.setRecruiterId(job.getRecruiterId());
+        jobDto.setRequiredYearsExperience(job.getRequiredYearsExperience());
+        jobDto.setOpenings(job.getOpenings());
+        jobDto.setStatus(job.getStatus());
+
+        // Fetch skillIds from JobSkillsRepository
+        List<Long> skillIds = jobSkillRepository.findByJobJobId(job.getJobId())
+                .stream()
+                .map(JobSkill::getSkillId)
+                .collect(Collectors.toList());
+        jobDto.setSkillIds(skillIds);
+
         return jobDto;
     }
 
@@ -57,6 +83,12 @@ public class JobService {
         job.setPosition(jobDto.getTitle());
         job.setDescription(jobDto.getDescription());
         job.setCompanyId(jobDto.getCompanyId());
+        job.setPostedOn(jobDto.getPostedOn());
+        job.setRecruiterId(jobDto.getRecruiterId());
+        job.setRequiredYearsExperience(jobDto.getRequiredYearsExperience());
+        job.setOpenings(jobDto.getOpenings());
+        job.setStatus(jobDto.getStatus());
+
         return job;
     }
 }

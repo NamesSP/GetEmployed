@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import com.example.dto.JobStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Min;
@@ -54,9 +55,6 @@ public class Jobs {
     private LocalDateTime updatedAt = LocalDateTime.now();
 
 
-    public enum JobStatus {
-        OPEN, CLOSED
-    }
 
     @PreUpdate
     protected void onUpdate() {
