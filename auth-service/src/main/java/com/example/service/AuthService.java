@@ -5,12 +5,7 @@ package com.example.service;
 //import org.example.dto.LoginRequest;
 //import org.example.dto.RegisterRequest;
 //import org.example.dto.RegisterResponse;
-import com.example.dto.AuthResponse;
-import com.example.dto.AuthUserInfoDto;
-import com.example.dto.LoginRequest;
-import com.example.dto.RegisterRequest;
-import com.example.dto.RegisterResponse;
-import com.example.dto.Role;
+import com.example.dto.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.entity.User;
@@ -21,7 +16,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -61,11 +55,9 @@ public class AuthService {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String token = jwtUtil.generateToken(userDetails);
-
-        User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        User user = (User) authentication.getPrincipal(); // cast safely
+        UserTokenPayload payload = new UserTokenPayload(user.getUsername(), user.getRole());
+        String token = jwtUtil.generateToken(payload);
 
         return new AuthResponse(token, user.getUsername(), user.getRole().name(), "Login successful");
     }

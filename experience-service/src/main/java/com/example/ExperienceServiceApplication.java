@@ -1,6 +1,5 @@
 package com.example;
 
-import com.example.config.WebMvcConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -8,7 +7,6 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 @EnableFeignClients
-@Import(WebMvcConfig.class)
 public class ExperienceServiceApplication {
 
 	public static void main(String[] args) {
