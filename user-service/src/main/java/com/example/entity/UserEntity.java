@@ -2,13 +2,17 @@ package com.example.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "user_profiles")
 @Data
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserEntity {
 
     @Id
