@@ -5,25 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1c0bcbe-ab65-406a-8722-999857c2af50" name="Changes" comment="">
-
+      <change afterPath="$PROJECT_DIR$/../Jenkinsfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommonApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommonApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/application-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/application-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/auth-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/auth-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/company-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/company-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/experience-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/experience-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/job-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/job-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../experience-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../experience-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/entity/Job.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/entity/JobSkill.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/entity/JobSkill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/entity/Jobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/entity/Jobs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/repository/JobRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/repository/JobRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/repository/JobSkillRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/repository/JobSkillRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/service/JobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/service/JobService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../run-services.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/../run-services.ps1" afterDir="false" />
-
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,12 +30,12 @@
     &quot;assignee&quot;: &quot;priyamshu11&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/NamesSP/GetEmployed.git",
-    "accountId": "6a9eb726-996b-4ce8-9f46-665cd5c43ce8"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/NamesSP/GetEmployed.git&quot;,
+    &quot;accountId&quot;: &quot;6a9eb726-996b-4ce8-9f46-665cd5c43ce8&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -67,11 +51,9 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
-
-    "git-widget-placeholder": "userservicetestn",
+    "git-widget-placeholder": "jennib",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Administrator/Desktop/SpringBoot/GetEmployed/commonDTO",
-
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
