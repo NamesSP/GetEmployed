@@ -15,6 +15,7 @@
 	<properties>
 		<sonar.host.url>http://localhost:9000</sonar.host.url>
 		<sonar.login>squ_1d8f18fa075d363c0c542dcb7e52f4576895ec41</sonar.login>
+		<sonar.exclusions>pom.xml</sonar.exclusions>
 	</properties>
 
 	<dependencies>
