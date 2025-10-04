@@ -1,0 +1,49 @@
+package com.example.config;
+
+import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+
+
+@Configuration
+public class GatewayConfig {
+
+    private final RoleAuthGatewayFilterFactory roleAuthGatewayFilterFactory;
+
+    public GatewayConfig(RoleAuthGatewayFilterFactory roleAuthGatewayFilterFactory) {
+        this.roleAuthGatewayFilterFactory = roleAuthGatewayFilterFactory;
+    }
+
+    @Bean
+    public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
+        return builder.routes()
+            .route("auth-service", r -> r.path("/api/auth/**")
+                .uri("lb://auth-service"))
+            .route("user-service", r -> r.path("/api/users/**")
+                .filters(f -> f.filter(roleAuthGatewayFilterFactory.apply(cfg -> {
+                    cfg.setRole("ADMIN"); // example, change to appropriate role validations
+                })))
+                .uri("lb://user-service"))
+            .route("company-service", r -> r.path("/api/companies/**")
+                .filters(f -> f.filter(roleAuthGatewayFilterFactory.apply(cfg -> {
+                    cfg.setRole("RECRUITER");
+                })))
+                .uri("lb://company-service"))
+            .route("job-service", r -> r.path("/api/jobs/**")
+                .filters(f -> f.filter(roleAuthGatewayFilterFactory.apply(cfg -> {
+                    cfg.setRole("RECRUITER");
+                })))
+                .uri("lb://job-service"))
+            .route("application-service", r -> r.path("/api/applications/**")
+                .filters(f -> f.filter(roleAuthGatewayFilterFactory.apply(cfg -> {
+                    cfg.setRole("SEEKER");
+                })))
+                .uri("lb://application-service"))
+            .build();
+    }
+}

@@ -8,10 +8,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import com.example.dto.UserDto;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
@@ -20,7 +18,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Component
-@EnableWebSecurity
 public class JwtUtil {
 
     @Value("${jwt.secret}")
@@ -78,5 +75,10 @@ public class JwtUtil {
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    // New method to extract user role from JWT claims
+    public String extractUserRole(String token) {
+        return extractClaim(token, claims -> claims.get("role", String.class));
     }
 }
