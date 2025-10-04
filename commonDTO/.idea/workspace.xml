@@ -5,23 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1c0bcbe-ab65-406a-8722-999857c2af50" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommonApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommonApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/application-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/application-service.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service/src/main/java/com/example/ApplicationServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../application-service/src/main/java/com/example/ApplicationServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/src/main/java/com/example/AuthServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/src/main/java/com/example/AuthServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/src/main/java/com/example/config/AuthServiceSecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/src/main/java/com/example/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/src/main/java/com/example/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/src/main/java/com/example/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/src/main/java/com/example/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommonApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/util/JwtAuthenticationFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/util/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/util/JwtUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../company-service/src/main/java/com/example/CompanyServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../company-service/src/main/java/com/example/CompanyServiceApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/auth-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/auth-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/company-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/company-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/experience-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/experience-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/job-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/job-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../experience-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../experience-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/entity/Job.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/entity/JobSkill.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/entity/JobSkill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/entity/Jobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/entity/Jobs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/repository/JobRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/repository/JobRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/repository/JobSkillRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/repository/JobSkillRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/service/JobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/service/JobService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/user-service-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/config-repo/user-service-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../experience-service/src/main/java/com/example/ExperienceServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../experience-service/src/main/java/com/example/ExperienceServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gateway-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway-service/src/main/java/com/example/GatewayServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gateway-service/src/main/java/com/example/GatewayServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway-service/src/main/java/com/example/config/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gateway-service/src/main/java/com/example/config/GatewayConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../gateway-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../job-service/src/main/java/com/example/JobServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../job-service/src/main/java/com/example/JobServiceApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../run-services.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/../run-services.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-service/src/main/java/com/example/UserServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/src/main/java/com/example/UserServiceApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,21 +64,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.CommonApplication.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "firebasesrujan",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Administrator/GetEmployed/commonDTO",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.CommonApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;firebasesp&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Administrator/GetEmployed/commonDTO&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Sony_Course\GetEmployed_Project\GetEmployed\commonDTO\src\main\java\org\example\dto" />
@@ -88,5 +94,16 @@
       <updated>1757315980178</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

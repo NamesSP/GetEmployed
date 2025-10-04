@@ -1,0 +1,30 @@
+# Gateway Service specific configuration
+spring:
+  application:
+    name: gateway-service
+  main:
+    web-application-type: reactive
+
+server:
+  port: 8091
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+# JWT Configuration (must match auth-service)
+jwt:
+  secret: 5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437
+  expiration: 86400000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

@@ -50,18 +50,6 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/validate")
-    public ResponseEntity<Boolean> validateToken(@RequestHeader("Authorization") String token) {
-        try {
-            if (token.startsWith("Bearer ")) {
-                token = token.substring(7);
-            }
-            boolean isValid = authService.validateToken(token);
-            return ResponseEntity.ok(isValid);
-        } catch (Exception e) {
-            return ResponseEntity.ok(false);
-        }
-    }
 
 //    @GetMapping("/user-info/{username}")
 //    public ResponseEntity<AuthUserInfoDto> getUserInfo(@PathVariable String username) {
