@@ -63,15 +63,16 @@ public class AuthController {
         }
     }
 
-//    @GetMapping("/user-info/{username}")
-//    public ResponseEntity<AuthUserInfoDto> getUserInfo(@PathVariable String username) {
-//        try {
-//            AuthUserInfoDto dto = authService.getUserInfoByUsername(username);
-//            return ResponseEntity.ok();
-//        } catch (Exception e) {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+    // @GetMapping("/user-info/{username}")
+    // public ResponseEntity<AuthUserInfoDto> getUserInfo(@PathVariable String
+    // username) {
+    // try {
+    // AuthUserInfoDto dto = authService.getUserInfoByUsername(username);
+    // return ResponseEntity.ok();
+    // } catch (Exception e) {
+    // return ResponseEntity.notFound().build();
+    // }
+    // }
 
     @GetMapping("/users/{id}/exists")
     public ResponseEntity<Boolean> userExists(@PathVariable Long id) {
@@ -92,5 +93,19 @@ public class AuthController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // In AuthController.java (auth-service)
+    @GetMapping("/users/info/username/{username}")
+    public ResponseEntity<AuthUserInfoDto> getUserInfoByUsername(@PathVariable String username) {
+        return userRepository.findByUsername(username)
+                .map(u -> {
+                    AuthUserInfoDto dto = new AuthUserInfoDto();
+                    dto.setId(u.getId());
+                    dto.setEmail(u.getEmail());
+                    dto.setUsername(u.getUsername());
+                    dto.setRole("ROLE_" + u.getRole().name()); // Prefix for authorities
+                    return ResponseEntity.ok(dto);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
 
 }

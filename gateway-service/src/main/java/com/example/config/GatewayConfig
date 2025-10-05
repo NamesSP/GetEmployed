@@ -4,46 +4,46 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsWebFilter;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
 
 @Configuration
 public class GatewayConfig {
 
-    private final RoleAuthGatewayFilterFactory roleAuthGatewayFilterFactory;
-
-    public GatewayConfig(RoleAuthGatewayFilterFactory roleAuthGatewayFilterFactory) {
-        this.roleAuthGatewayFilterFactory = roleAuthGatewayFilterFactory;
-    }
-
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-            .route("auth-service", r -> r.path("/api/auth/**")
-                .uri("lb://auth-service"))
-            .route("user-service", r -> r.path("/api/users/**")
-                .filters(f -> f.filter(roleAuthGatewayFilterFactory.apply(cfg -> {
-                    cfg.setRole("ADMIN"); // example, change to appropriate role validations
-                })))
-                .uri("lb://user-service"))
-            .route("company-service", r -> r.path("/api/companies/**")
-                .filters(f -> f.filter(roleAuthGatewayFilterFactory.apply(cfg -> {
-                    cfg.setRole("RECRUITER");
-                })))
-                .uri("lb://company-service"))
-            .route("job-service", r -> r.path("/api/jobs/**")
-                .filters(f -> f.filter(roleAuthGatewayFilterFactory.apply(cfg -> {
-                    cfg.setRole("RECRUITER");
-                })))
-                .uri("lb://job-service"))
-            .route("application-service", r -> r.path("/api/applications/**")
-                .filters(f -> f.filter(roleAuthGatewayFilterFactory.apply(cfg -> {
-                    cfg.setRole("SEEKER");
-                })))
-                .uri("lb://application-service"))
-            .build();
+                .route("auth-service", r -> r.path("/api/auth/**")
+                        .uri("lb://auth-service"))
+                .route("user-service", r -> r.path("/api/users/**")
+                        .uri("lb://user-service"))
+                .route("company-service", r -> r.path("/api/companies/**")
+                        .uri("lb://company-service"))
+                .route("job-service", r -> r.path("/api/jobs/**")
+                        .uri("lb://job-service"))
+                .route("application-service", r -> r.path("/api/applications/**")
+                        .uri("lb://application-service"))
+                .route("experience-service", r -> r.path("/api/experience/**")
+                        .uri("lb://experience-service"))
+                // Add more routes as needed, e.g., .route("skill-service", r -> r.path("/api/skills/**").uri("lb://skill-service"))
+                .build();
+    }
+
+    @Bean
+    public CorsWebFilter corsWebFilter() {
+        CorsConfiguration corsConfig = new CorsConfiguration();
+        corsConfig.setAllowedOriginPatterns(Arrays.asList("*"));
+        corsConfig.setMaxAge(3600L);
+        corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        corsConfig.setAllowedHeaders(Arrays.asList("*"));
+        corsConfig.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfig);
+
+        return new CorsWebFilter(source);
     }
 }
