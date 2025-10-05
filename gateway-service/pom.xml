@@ -61,7 +61,12 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-webflux</artifactId>
 </dependency>
-
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <scope>runtime</scope>
+    <optional>true</optional>
+</dependency>
 <!-- Includes spring-security-core, spring-security-web, and spring-security-config 
      (where ServerHttpSecurity is located), all configured for reactive use. -->
 <dependency>
