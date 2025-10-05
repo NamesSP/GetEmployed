@@ -56,7 +56,18 @@
             <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
-        
+        <!-- Required for Spring WebFlux applications -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-webflux</artifactId>
+</dependency>
+
+<!-- Includes spring-security-core, spring-security-web, and spring-security-config 
+     (where ServerHttpSecurity is located), all configured for reactive use. -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
         
         <!-- Common DTO dependency -->
         <dependency>
