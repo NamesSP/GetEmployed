@@ -2,10 +2,12 @@
 package com.example.controller;
 
 import com.example.dto.CompanyDto;
+import java.util.Optional;
 import com.example.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.entity.Recruiter;
 
 import java.util.List;
 
@@ -33,5 +35,37 @@ public class CompanyController {
     @GetMapping
     public ResponseEntity<List<CompanyDto>> getAllCompanies() {
         return ResponseEntity.ok(companyService.getAllCompanies());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CompanyDto> updateCompany(@PathVariable Long id, @RequestBody CompanyDto companyDetails) {
+        return ResponseEntity.ok(companyService.updateCompany(id, companyDetails));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCompany(@PathVariable Long id) {
+        companyService.deleteCompany(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/allrecruiter")
+    public ResponseEntity<List<Recruiter>> getAllRecruiters() {
+        return ResponseEntity.ok(companyService.getAllRecruiters());
+    }
+
+    @PostMapping("/recruiter")
+    public ResponseEntity<Recruiter> addRecruiter(@RequestBody Recruiter recruiter) {
+        return ResponseEntity.ok(companyService.createRecruiter(recruiter));
+    }
+
+    @GetMapping("/{companyId}/recruiters")
+    public ResponseEntity<Optional<List<Recruiter>>> getRecruitersByCompany(@PathVariable Long companyId) {
+        return ResponseEntity.ok(companyService.getRecruitersByCompany(companyId));
+    }
+
+    @DeleteMapping("/recruiter/{id}")
+    public ResponseEntity<Void> deleteRecruiter(@PathVariable Long id) {
+        companyService.deleteRecruiter(id);
+        return ResponseEntity.noContent().build();
     }
 }
