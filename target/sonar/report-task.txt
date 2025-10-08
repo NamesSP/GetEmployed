@@ -1,0 +1,6 @@
+projectKey=com.example:job-portal-aggregator
+serverUrl=http://localhost:9000
+serverVersion=25.9.0.112764
+dashboardUrl=http://localhost:9000/dashboard?id=com.example%3Ajob-portal-aggregator
+ceTaskId=aea050d4-6b33-4902-94d8-89c1e8ab8847
+ceTaskUrl=http://localhost:9000/api/ce/task?id=aea050d4-6b33-4902-94d8-89c1e8ab8847

@@ -32,6 +32,7 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.28/lombok-1.18.28.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.28/lombok-1.18.28.jar" />
         </processorPath>
         <module name="auth-service" />
       </profile>
@@ -47,6 +48,7 @@
       <module name="discovery-server" options="-parameters" />
       <module name="experience-service" options="-parameters" />
       <module name="gateway-service" options="-parameters" />
+      <module name="job-portal-aggregator" options="-parameters" />
       <module name="job-service" options="-parameters" />
       <module name="logging-service" options="-parameters" />
       <module name="user-service" options="-parameters" />

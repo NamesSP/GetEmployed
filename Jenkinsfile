@@ -19,7 +19,7 @@ pipeline {
             steps {
                 echo "Compiling the Spring Boot application..."
                 echo "${WORKSPACE}"
-                bat """cd ${WORKSPACE}\\user-service
+                bat """cd ${WORKSPACE}
                 mvn clean compile"""
             }
         }
@@ -27,7 +27,7 @@ pipeline {
         stage('Run Unit Tests') {
             steps {
                 echo "Running unit tests..."
-                bat """cd ${WORKSPACE}\\user-service
+                bat """cd ${WORKSPACE}
                                     mvn clean test"""
             }
         }
@@ -35,7 +35,7 @@ pipeline {
                     steps {
                         echo "Running SonarQube code analysis..."
                         bat """
-                                cd ${WORKSPACE}\\user-service
+                                cd ${WORKSPACE}
                                             mvn sonar:sonar
                         """
 
@@ -45,7 +45,7 @@ pipeline {
         stage('Jar File Creation') {
                     steps {
                         echo "Running unit tests..."
-                        bat """cd ${WORKSPACE}\\user-service
+                        bat """cd ${WORKSPACE}
                                             mvn package"""
                     }
                 }
