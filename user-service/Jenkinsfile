@@ -2,73 +2,64 @@ pipeline {
     agent any
 
     environment {
-        MAVEN_HOME = 'C:\\apache-maven-3.9.11' // Change path if needed
-        PATH = "${MAVEN_HOME}\\bin;${env.PATH}"
+        MAVEN_HOME = 'C:\\apache-maven-3.9.11' // Update if Maven is in a different path
+        PATH = "${env.MAVEN_HOME}\\bin;${env.PATH}"
     }
 
     stages {
+
         stage('Checkout') {
             steps {
-                echo "Checking out code..."
+                echo "Checking out source code..."
                 checkout scm
             }
         }
 
         stage('Compile') {
             steps {
-                echo "Compiling code..."
-                bat """
-                    cd "${WORKSPACE}\\user-service"
-                    mvn clean compile
-                """
+                echo "Compiling the Spring Boot application..."
+                echo "${WORKSPACE}"
+                bat """cd ${WORKSPACE}\\user-service
+                mvn clean compile"""
             }
         }
 
-        stage('Test') {
+        stage('Run Unit Tests') {
             steps {
-                echo "Running tests..."
-                bat """
-                    cd "${WORKSPACE}\\user-service"
-                    mvn test
-                """
+                echo "Running unit tests..."
+                bat """cd ${WORKSPACE}\\user-service
+                                    mvn clean test"""
             }
         }
-
         stage('SonarQube Analysis') {
-            steps {
-                echo "Running SonarQube analysis..."
+                    steps {
+                        echo "Running SonarQube code analysis..."
+                        bat """
+                                cd ${WORKSPACE}\\user-service
+                                            mvn sonar:sonar
+                        """
 
-                // Use the server configured in Jenkins → Configure System
-                withSonarQubeEnv('MySonarQubeServer') {
-                    bat """
-                        cd "${WORKSPACE}\\user-service"
-                        mvn sonar:sonar ^
-                            -Dsonar.projectKey=user-service ^
-                            -Dsonar.projectName=user-service ^
-                            -Dsonar.host.url=%SONAR_HOST_URL% ^
-                            -Dsonar.login=%SONAR_AUTH_TOKEN%
-                    """
+                    }
                 }
-            }
-        }
 
-        stage('Package') {
-            steps {
-                echo "Packaging application..."
-                bat """
-                    cd "${WORKSPACE}\\user-service"
-                    mvn package -DskipTests
-                """
-            }
-        }
+        stage('Jar File Creation') {
+                    steps {
+                        echo "Running unit tests..."
+                        bat """cd ${WORKSPACE}\\user-service
+                                            mvn package"""
+                    }
+                }
+
+
+
     }
 
     post {
         success {
-            echo '✅ Build, test, and Sonar analysis successful!'
+            echo 'Build and test completed successfully.'
         }
         failure {
-            echo '❌ Build failed. Check logs for details.'
+            echo 'Build or tests failed.'
         }
     }
 }
