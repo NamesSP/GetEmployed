@@ -35,7 +35,7 @@ pipeline {
                     steps {
                         echo "Running SonarQube code analysis..."
                         bat """
-                                cd ${WORKSPACE}//user-service
+                                cd ${WORKSPACE}\\user-service
                                 mvn sonar:sonar
                         """
 
