@@ -62,4 +62,4 @@ pipeline {
             echo 'Build or tests failed.'
         }
     }
-} rectify if any error
+}
