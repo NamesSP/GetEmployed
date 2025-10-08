@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo "Running unit tests..."
                 bat """cd ${WORKSPACE}
-                                    mvn clean test"""
+                                    mvn test"""
             }
         }
         stage('SonarQube Analysis') {
