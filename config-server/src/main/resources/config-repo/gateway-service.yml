@@ -1,54 +1,65 @@
-# Gateway Service specific configuration
+# =======================================================
+# Gateway Service specific configuration (Spring Boot 3.x)
+# =======================================================
 spring:
   application:
     name: gateway-service
+
   main:
     web-application-type: reactive
 
+  webflux:
+    codec:
+      max-in-memory-size: 65536 # Fix for large JWTs/headers
+
   cloud:
     gateway:
-      default-filters:
-        - PreserveHostHeader=true
+      server:
+        webflux:
+          default-filters:
+            - PreserveHostHeader=true
 
-      routes:
-        # Company Service
-        - id: company-service
-          uri: http://localhost:8083
-          predicates:
-            - Path=/companies/**
+          routes:
+            # Company Service
+            - id: company-service
+              uri: http://localhost:8083
+              predicates:
+                - Path=/companies/**
 
-        # User Service
-        - id: user-service
-          uri: http://localhost:8090
-          predicates:
-            - Path=/users/**
+            # User Service
+            - id: user-service
+              uri: http://localhost:8090
+              predicates:
+                - Path=/users/**
 
-        # Job Service
-        - id: job-service
-          uri: http://localhost:8084
-          predicates:
-            - Path=/jobs/**
+            # Job Service
+            - id: job-service
+              uri: http://localhost:8084
+              predicates:
+                - Path=/jobs/**
 
-        # Auth Service
-        - id: auth-service
-          uri: http://localhost:8082
-          predicates:
-            - Path=/api/auth/**
+            # Auth Service
+            - id: auth-service
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/auth/**
 
-        # Experience Service
-        - id: experience-service
-          uri: http://localhost:8086
-          predicates:
-            - Path=/experiences/**
+            # Experience Service
+            - id: experience-service
+              uri: http://localhost:8086
+              predicates:
+                - Path=/experiences/**
 
-        # Application Service
-        - id: application-service
-          uri: http://localhost:8085
-          predicates:
-            - Path=/applications/**
+            # Application Service
+            - id: application-service
+              uri: http://localhost:8085
+              predicates:
+                - Path=/applications/**
 
 server:
   port: 8091
+  netty:
+    max-request-header-size: 65536
 
 eureka:
   client:

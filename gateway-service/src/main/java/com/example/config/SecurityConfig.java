@@ -12,28 +12,14 @@ import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 @Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
-
-    // @Bean
-    // public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http)
-    // {
-    // return http
-    // .csrf(ServerHttpSecurity.CsrfSpec::disable) // ❌ disable CSRF
-    // .authorizeExchange(exchanges -> exchanges
-    // .pathMatchers("/api/auth/**").permitAll() // allow login/register
-    // .anyExchange().authenticated() // require auth for others
-    // )
-    // .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable) // disable default
-    // login popup
-    // .formLogin(ServerHttpSecurity.FormLoginSpec::disable) // disable form login
-    // .build();
-    // }
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
-                .csrf(ServerHttpSecurity.CsrfSpec::disable)
+//                .csrf(ServerHttpSecurity.CsrfSpec::disable)
+                .csrf(csrf-> csrf.disable())
                 .addFilterAt(jwtAuthenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers("/api/auth/**").permitAll()
