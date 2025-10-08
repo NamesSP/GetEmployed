@@ -2,6 +2,9 @@ package com.example.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
@@ -31,14 +34,18 @@ public class SecurityConfig {
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+
+        System.out.println(">>> Security config loaded <<<");
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .addFilterAt(jwtAuthenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers("/api/auth/**").permitAll()
+                        .pathMatchers("/test/**").permitAll()
                         .pathMatchers("/api/admin/**").hasRole("ADMIN")
-                        .pathMatchers("/users/**").hasAnyRole("SEEKER", "ADMIN")
+                        .pathMatchers("/users/**").hasAnyRole("SEEKER", "ADMIN","RECRUITER")
                         .pathMatchers("/companies/**").hasAnyRole("RECRUITER", "ADMIN")
                         .pathMatchers("/jobs/**").hasAnyRole("RECRUITER", "ADMIN")
                         .pathMatchers("/experiences/**").hasAnyRole("RECRUITER", "ADMIN", "SEEKER")

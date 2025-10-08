@@ -16,6 +16,6 @@ public class Recruiter {
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "company_id", referencedColumnName = "id", nullable = false)
-    private Company company;
+    @JoinColumn(name = "company_id", referencedColumnName = "companyId", nullable = false)
+    private Companies company;
 }

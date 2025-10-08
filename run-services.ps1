@@ -17,7 +17,7 @@ function Start-Microservice {
 }
 
 # Base directory where all microservices are located
-$baseDir = "D:\technical_training_SONY\GetEmployed"
+$baseDir = "C:\Users\Administrator\GetEmployed"
 
 # Start core services in order
 Start-Microservice -Name "discovery-server" -Directory "$baseDir\discovery-server" -WaitSeconds 25
@@ -31,7 +31,6 @@ $otherServices = @(
     "company-service",
     "experience-service",
     "job-service",
-    "logging-service",
     "user-service"
 )
 

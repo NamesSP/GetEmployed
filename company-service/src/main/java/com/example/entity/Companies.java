@@ -12,17 +12,29 @@ import java.util.List;
 @Data
 public class Companies {
 
+    public Long getCompanyId() {
+        return companyId;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long companyId;
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 
     @Column(nullable = false, length = 200, unique = true)
     @NotBlank(message = "Company name cannot be blank")
     private String companyName;
 
-    @Column(nullable = false, length = 200)
-    @NotBlank(message = "Location cannot be blank")
-    private String location;
+    @Column(nullable = false, length = 500)
+    @NotBlank(message = "Description cannot be blank")
+    private String description;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();

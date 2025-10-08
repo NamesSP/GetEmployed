@@ -1,12 +1,36 @@
 package com.example.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.web.server.csrf.CsrfWebFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.server.WebFilter;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.web.server.WebFilter;
+import org.springframework.security.web.server.csrf.CsrfWebFilter;
+import reactor.core.publisher.Mono;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
 import java.util.List;
@@ -72,7 +96,7 @@ public class GatewayConfig {
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.setAllowedOriginPatterns(List.of("*"));
-        corsConfig.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
+        corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         corsConfig.setAllowedHeaders(List.of("*"));
         corsConfig.setAllowCredentials(true);
         corsConfig.setMaxAge(3600L);
@@ -82,4 +106,53 @@ public class GatewayConfig {
 
         return new CorsWebFilter(source);
     }
+
+    @Bean
+    public ApplicationRunner showSecurityBeans(ApplicationContext ctx) {
+        return args -> {
+            System.out.println("=== SecurityWebFilterChain beans ===");
+            for (String name : ctx.getBeanNamesForType(SecurityWebFilterChain.class)) {
+                System.out.println(name + " -> " + ctx.getBean(name).getClass().getName());
+            }
+
+            System.out.println("=== WebFilter beans (some relevant types) ===");
+            for (String name : ctx.getBeanNamesForType(WebFilter.class)) {
+                System.out.println(name + " -> " + ctx.getBean(name).getClass().getName());
+            }
+
+            System.out.println("=== CsrfWebFilter beans ===");
+            for (String name : ctx.getBeanNamesForType(CsrfWebFilter.class)) {
+                System.out.println(name + " -> " + ctx.getBean(name).getClass().getName());
+            }
+        };
+    }
+
+
+
+    @Configuration
+    public class LoggingFilterConfig {
+
+        private static final Logger log = LoggerFactory.getLogger(LoggingFilterConfig.class);
+
+        @Bean
+        @Order(Ordered.HIGHEST_PRECEDENCE)
+        public GlobalFilter logRequestResponseFilter() {
+            return (exchange, chain) -> {
+                String path = exchange.getRequest().getPath().toString();
+                String method = exchange.getRequest().getMethod().name();
+                log.info("➡️ Request: {} {}", method, path);
+
+                exchange.getRequest().getHeaders()
+                        .forEach((k, v) -> log.debug("Request Header {} = {}", k, v));
+
+                return chain.filter(exchange).then(
+                        Mono.fromRunnable(() -> {
+                            log.info("⬅️ Response for {} {}: status {}", method, path,
+                                    exchange.getResponse().getStatusCode());
+                        })
+                );
+            };
+        }
+    }
+
 }

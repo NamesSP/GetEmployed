@@ -47,25 +47,4 @@ public class CompanyController {
         companyService.deleteCompany(id);
         return ResponseEntity.noContent().build();
     }
-
-    @GetMapping("/allrecruiter")
-    public ResponseEntity<List<Recruiter>> getAllRecruiters() {
-        return ResponseEntity.ok(companyService.getAllRecruiters());
-    }
-
-    @PostMapping("/recruiter")
-    public ResponseEntity<Recruiter> addRecruiter(@RequestBody Recruiter recruiter) {
-        return ResponseEntity.ok(companyService.createRecruiter(recruiter));
-    }
-
-    @GetMapping("/{companyId}/recruiters")
-    public ResponseEntity<Optional<List<Recruiter>>> getRecruitersByCompany(@PathVariable Long companyId) {
-        return ResponseEntity.ok(companyService.getRecruitersByCompany(companyId));
-    }
-
-    @DeleteMapping("/recruiter/{id}")
-    public ResponseEntity<Void> deleteRecruiter(@PathVariable Long id) {
-        companyService.deleteRecruiter(id);
-        return ResponseEntity.noContent().build();
-    }
 }
