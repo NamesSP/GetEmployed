@@ -4,6 +4,7 @@ pipeline {
     environment {
         MAVEN_HOME = 'C:\\apache-maven-3.9.11' // Update if Maven is in a different path
         PATH = "${env.MAVEN_HOME}\\bin;${env.PATH}"
+        SONARQUBE_ENV = 'SonarQubeServer'
     }
 
     stages {
@@ -31,6 +32,17 @@ pipeline {
                                     mvn clean test"""
             }
         }
+        stage('SonarQube Analysis') {
+                    steps {
+                        echo "Running SonarQube code analysis..."
+                        withSonarQubeEnv("${SONARQUBE_ENV}") {
+                            bat """
+                                cd ${WORKSPACE}
+                                mvn sonar:sonar
+                            """
+                        }
+                    }
+                }
 
         stage('Jar File Creation') {
                     steps {

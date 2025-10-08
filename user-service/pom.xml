@@ -12,6 +12,12 @@
 	<name>user-service</name>
 	<description>Demo project for Spring Boot</description>
 
+	<properties>
+		<sonar.host.url>http://localhost:9000</sonar.host.url>
+		<sonar.login>squ_1d8f18fa075d363c0c542dcb7e52f4576895ec41</sonar.login>
+		<sonar.exclusions>pom.xml</sonar.exclusions>
+	</properties>
+
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
@@ -236,6 +242,11 @@
 					<target>17</target>
 				</configuration>
 
+			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.10.0.2594</version>
 			</plugin>
 		</plugins>
 	</build>
