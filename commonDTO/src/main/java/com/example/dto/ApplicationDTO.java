@@ -11,4 +11,6 @@ public class ApplicationDTO {
     private Long applicationId;
     private Integer statusId;
     private String statusName;
+    private Long userId;     // add this
+    private Long jobId;
 }

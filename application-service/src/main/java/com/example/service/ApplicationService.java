@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.dto.ApplicationDTO;
 import com.example.entity.ApplicationEntity;
 import com.example.entity.StatusEntity;
 import com.example.repository.ApplicationRepository;
@@ -43,14 +44,17 @@ public class ApplicationService {
     }
 
     // Create a new application
-    public ApplicationEntity createApplication(ApplicationEntity application) {
-        application.setAppliedAt(LocalDateTime.now());
+    public ApplicationEntity createApplication(ApplicationDTO applicationDTO) {
+        ApplicationEntity application = new ApplicationEntity();
+        application.setUserId(applicationDTO.getUserId());
+        application.setJobId(applicationDTO.getJobId());
 
-        if (application.getStatus() == null) {
-            StatusEntity defaultStatus = statusRepository.findById(1) // e.g., Pending
-                    .orElseThrow(() -> new RuntimeException("Default status not found"));
-            application.setStatus(defaultStatus);
-        }
+        // set status
+        StatusEntity status = statusRepository.findById(applicationDTO.getStatusId())
+                .orElseThrow(() -> new RuntimeException("Status not found"));
+        application.setStatus(status);
+
+        application.setAppliedAt(LocalDateTime.now());
 
         return applicationRepository.save(application);
     }

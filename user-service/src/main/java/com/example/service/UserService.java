@@ -100,6 +100,8 @@ public class UserService {
         applicationDto.setApplicationId(null); // Let application-service generate ID
         applicationDto.setStatusId(1);         // Assuming 1 = "Applied"
         applicationDto.setStatusName("Applied");
+        applicationDto.setUserId(user.getAuthId());  // or user.getId() depending on DB mapping
+        applicationDto.setJobId(jobId);
 
         applicationServiceClient.createApplication(applicationDto);
     }

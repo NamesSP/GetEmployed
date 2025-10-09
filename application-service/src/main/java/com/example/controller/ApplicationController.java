@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.dto.ApplicationDTO;
 import com.example.entity.ApplicationEntity;
 import com.example.service.ApplicationService;
 import lombok.RequiredArgsConstructor;
@@ -44,8 +45,8 @@ public class ApplicationController {
 
     // Create a new application
     @PostMapping
-    public ApplicationEntity createApplication(@RequestBody ApplicationEntity application) {
-        return applicationService.createApplication(application);
+    public ApplicationEntity createApplication(@RequestBody ApplicationDTO applicationDTO) {
+        return applicationService.createApplication(applicationDTO);
     }
 
     // Update application status
