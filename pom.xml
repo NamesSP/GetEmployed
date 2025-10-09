@@ -31,7 +31,7 @@
         <module>experience-service</module>
         <module>gateway-service</module>
         <module>job-service</module>
-        <module>logging-service</module>
+
         <module>user-service</module>
     </modules>
 

@@ -8,8 +8,10 @@ import org.springframework.http.ResponseEntity;
 
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -45,4 +47,21 @@ public class UserController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    //modified for Job apply
+    @PostMapping("/{authId}/apply")
+    public ResponseEntity<String> applyForJob(@PathVariable Long authId, @RequestBody Map<String, Long> payload) {
+        Long jobId = payload.get("jobId");
+        if (jobId == null) {
+            return ResponseEntity.badRequest().body("Missing jobId");
+        }
+
+        try {
+            userService.applyForJob(authId, jobId);
+            return ResponseEntity.ok("Application submitted successfully");
+        } catch (ResponseStatusException e) {
+            return ResponseEntity.status(e.getStatusCode()).body(e.getReason());
+        }
+    }
+
 }

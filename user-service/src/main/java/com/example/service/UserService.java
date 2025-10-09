@@ -1,13 +1,16 @@
 
 package com.example.service;
 
+import com.example.client.ApplicationServiceClient;
 import com.example.client.AuthServiceClient;
-import com.example.dto.UserDto;
+import com.example.client.JobserviceClient;
+import com.example.dto.*;
 import com.example.entity.UserEntity;
 import com.example.repository.UserRepository;
-import com.example.dto.AuthUserInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +23,12 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private AuthServiceClient authServiceClient;
+    @Autowired
+    private JobserviceClient jobServiceClient;
+
+    @Autowired
+    private ApplicationServiceClient applicationServiceClient;
+
 
     public UserDto createUser(UserDto userDto) {
         if (userDto.getAuthId() == null) {
@@ -72,6 +81,29 @@ public class UserService {
     public UserDto getUserByEmail(String email) {
         return userRepository.findByEmail(email).map(this::toDto).orElse(null);
     }
+
+    //modified for applyingJob
+    public void applyForJob(Long authId, Long jobId) {
+        UserEntity user = userRepository.findByAuthId(authId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+
+        if (!"SEEKER".equalsIgnoreCase(user.getRole())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Only SEEKERs can apply for jobs");
+        }
+
+        JobDto job = jobServiceClient.getJobById(jobId);
+        if (job == null || job.getStatus() == JobStatus.CLOSED) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Job not available");
+        }
+
+        ApplicationDTO applicationDto = new ApplicationDTO();
+        applicationDto.setApplicationId(null); // Let application-service generate ID
+        applicationDto.setStatusId(1);         // Assuming 1 = "Applied"
+        applicationDto.setStatusName("Applied");
+
+        applicationServiceClient.createApplication(applicationDto);
+    }
+
 
     private UserDto toDto(UserEntity user) {
         UserDto userDto = new UserDto();

@@ -25,10 +25,10 @@ public class Jobs {
 
     @Column(name = "company_id", nullable = false)
     private Long companyId;
-
-    @Column(nullable = false, length = 200)
-    @NotBlank(message = "Position cannot be blank")
-    private String position;
+//
+//    @Column(nullable = false, length = 200)
+//    @NotBlank(message = "Position cannot be blank")
+//    private String position;
 
     @Column(name = "required_years_experience")
     @Min(value = 0, message = "Required years experience must be non-negative")

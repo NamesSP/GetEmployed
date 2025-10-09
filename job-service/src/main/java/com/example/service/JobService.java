@@ -58,7 +58,7 @@ public class JobService {
     private JobDto toDto(Jobs job) {
         JobDto jobDto = new JobDto();
         jobDto.setId(job.getJobId());
-        jobDto.setTitle(job.getPosition());
+//        jobDto.setTitle(job.getPosition());
         jobDto.setDescription(job.getDescription());
         jobDto.setCompanyId(job.getCompanyId());
         jobDto.setCompany(companyClient.getCompanyById(job.getCompanyId()));
@@ -80,7 +80,7 @@ public class JobService {
 
     private Jobs toEntity(JobDto jobDto) {
         Jobs job = new Jobs();
-        job.setPosition(jobDto.getTitle());
+//        job.setPosition(jobDto.getTitle());
         job.setDescription(jobDto.getDescription());
         job.setCompanyId(jobDto.getCompanyId());
         job.setPostedOn(jobDto.getPostedOn());
