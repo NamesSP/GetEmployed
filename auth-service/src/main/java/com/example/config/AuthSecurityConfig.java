@@ -27,8 +27,11 @@ public class AuthSecurityConfig {
         //.httpBasic(withDefaults())
         //.addFilterAt(jwtAuthenticationWebFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
 
-        ;
+                .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
+                .formLogin(ServerHttpSecurity.FormLoginSpec::disable);
 
         return http.build();
     }
+
+
 }

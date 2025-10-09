@@ -1,5 +1,6 @@
 package com.example.config;
 
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -10,9 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.web.server.csrf.CsrfWebFilter;
-import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.CorsWebFilter;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import org.springframework.web.server.WebFilter;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
@@ -31,46 +31,12 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Map;
 
 import java.util.Arrays;
 import java.util.List;
 
-//@Configuration
-//public class GatewayConfig {
-//
-//    @Bean
-//    public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
-//        return builder.routes()
-//                .route("auth-service", r -> r.path("/api/auth/**")
-//                        .uri("lb://auth-service"))
-//                .route("user-service", r -> r.path("/api/users/**")
-//                        .uri("lb://user-service"))
-//                .route("company-service", r -> r.path("/api/companies/**")
-//                        .uri("lb://company-service"))
-//                .route("job-service", r -> r.path("/api/jobs/**")
-//                        .uri("lb://job-service"))
-//                .route("application-service", r -> r.path("/api/applications/**")
-//                        .uri("lb://application-service"))
-//                .route("experience-service", r -> r.path("/api/experience/**")
-//                        .uri("lb://experience-service"))
-//                .build();
-//    }
-//
-//    @Bean
-//    public CorsWebFilter corsWebFilter() {
-//        CorsConfiguration corsConfig = new CorsConfiguration();
-//        corsConfig.setAllowedOriginPatterns(Arrays.asList("*"));
-//        corsConfig.setMaxAge(3600L);
-//        corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-//        corsConfig.setAllowedHeaders(Arrays.asList("*"));
-//        corsConfig.setAllowCredentials(true);
-//
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", corsConfig);
-//
-//        return new CorsWebFilter(source);
-//    }
-//}
 @Configuration
 public class GatewayConfig {
 
@@ -92,20 +58,6 @@ public class GatewayConfig {
                 .build();
     }
 
-    @Bean
-    public CorsWebFilter corsWebFilter() {
-        CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.setAllowedOriginPatterns(List.of("*"));
-        corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        corsConfig.setAllowedHeaders(List.of("*"));
-        corsConfig.setAllowCredentials(true);
-        corsConfig.setMaxAge(3600L);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfig);
-
-        return new CorsWebFilter(source);
-    }
 
     @Bean
     public ApplicationRunner showSecurityBeans(ApplicationContext ctx) {
@@ -153,6 +105,16 @@ public class GatewayConfig {
                 );
             };
         }
+    }
+
+    @Autowired
+    private ApplicationContext context;
+
+    @PostConstruct
+    public void checkCorsBeans() {
+        Map<String, CorsConfigurationSource> beans = context.getBeansOfType(CorsConfigurationSource.class);
+        System.out.println("CorsConfigurationSource beans found:");
+        beans.forEach((name, bean) -> System.out.println(" - " + name + ": " + bean));
     }
 
 }
