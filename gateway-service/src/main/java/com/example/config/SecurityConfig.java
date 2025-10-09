@@ -40,7 +40,6 @@ public class SecurityConfig {
         System.out.println(">>> Security config loaded <<<");
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
-                .cors(ServerHttpSecurity.CorsSpec::disable)
                 .addFilterAt(jwtAuthenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers("/api/auth/**").permitAll()
